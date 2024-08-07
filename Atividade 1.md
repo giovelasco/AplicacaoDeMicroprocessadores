@@ -10,7 +10,7 @@
 
 *I. Das ferramentas para sistemas embarcados – quais as principais áreas de aplicação dos projetos no mercado brasileiro e o cenário internacional?*
 
-No mercado brasileiro, as principais áreas de atuação em sistemas embarcados são em Interne das Coisas (IoT), Indústria (Automobilística, Controle Industrial) e em Agroindústria e sistemas para campo. Já no mercado internacional, as principais áreas são Controle Industrial/ Automação, Internet das coisas (IoT) e Comunicações em Redes e Sem fio.
+No mercado brasileiro, as principais áreas de atuação em sistemas embarcados são em Internet das Coisas (IoT), Indústria (Automobilística, Controle Industrial) e em Agroindústria e sistemas para campo. Já no mercado internacional, as principais áreas são Controle Industrial/Automação, Internet das Coisas (IoT) e Comunicações em Redes e Sem fio.
 
 
 *II. Quais as principais ferramentas de comunicação sem fio que estão sendo usadas no Brasil e no mundo?*
@@ -29,5 +29,4 @@ Para o cenário brasileiro e global, a principal ferramenta de codificação é 
 
 *V. Dos microprocessadores/microcontroladores – quais os fabricantes/modelos mais citados na pesquisa?*
 
-Os fabricantes mais citados na pesquisa brasileira foram Espressif,
-seguido por STMicroeletronics e Microchip/Atmel. Já na pesquisa global, os fabricantes mais conhecidos foram STMicroelectronics, Microchip Technology e Texas Instruments. Além disso, no cenário global, o STM32 da STMicro é considerado o processador de 32 bits mais amplamente utilizado, junto com Raspberry Pi, i.MX da NXP, Arduino e AVR32 da Microchip. Enquanto isso, o PIC24 / dsPIC da Microchip, o MSP430 da TI e os ST9 e ST10 da STMicro são os processadores de 16 bits mais considerados. Os processadores de 8 bits mais populares são o PIC e AVR da Microchip, os ST6, ST7 e ST8 da STMicro e o 80xx da Intel.
+Os fabricantes mais citados na pesquisa brasileira foram Espressif, seguido por STMicroeletronics e Microchip/Atmel. Já na pesquisa global, os fabricantes mais conhecidos foram STMicroelectronics, Microchip Technology e Texas Instruments. Além disso, no cenário global, o STM32 da STMicro é considerado o processador de 32 bits mais amplamente utilizado, junto com Raspberry Pi, i.MX da NXP, Arduino e AVR32 da Microchip. Enquanto isso, o PIC24 / dsPIC da Microchip, o MSP430 da TI e os ST9 e ST10 da STMicro são os processadores de 16 bits mais considerados. Os processadores de 8 bits mais populares são o PIC e AVR da Microchip, os ST6, ST7 e ST8 da STMicro e o 80xx da Intel.
