@@ -20,11 +20,12 @@ No Brasil, as principais ferramentas são Wifi, Redes de Celular (3G/4G) e Bluet
 
 *III. Quais os principais kits/plataformas de prototipagem usados?*
 
-No Brasil, os principais kits utilizados são os kits com ESP32, kits de desemvolvimento/avaliação profissionais oferecidas pelo próprio fabricante do processsador e kits de Arduino. As plataformas de prototipagens mais utilizadas são o Arduino e Arm mbed. Já no cenário global, as principais placas utilizadas são Raspberry Pi, Arduino e placas com design customizado.
+No Brasil, os principais kits utilizados são os kits com ESP32, kits de desenvolvimento/avaliação profissionais oferecidas pelo próprio fabricante do processsador e kits de Arduino. As plataformas de prototipagens mais utilizadas são o Arduino e Arm mbed. Já no cenário global, as principais placas utilizadas são Raspberry Pi, Arduino e placas com design customizado.
 
 
 *IV. Dos softwares para sistemas embarcados - qual a principal ferramenta de codificação, principal sistema de controle de versão, e principal linguagem de programação?*
-A principal ferramenta de codificação é o Visual Studio Code, o principal sistema de controle de versão é o Git e a principal linguagem de programação é C.
+
+Para o cenário brasileiro e global, a principal ferramenta de codificação é o Visual Studio Code, o principal sistema de controle de versão é o Git e a principal linguagem de programação é C.
 
 *V. Dos microprocessadores/microcontroladores – quais os fabricantes/modelos mais citados na pesquisa?*
 
