@@ -1,4 +1,4 @@
-## Atividade 1 - Questões Pós-Aula
+## Atividade 01 - Questões Pós-Aula
 
 *Questão 1 - Apresentar a definição formal de um sistema embarcado, indicando a referência primária do IEEE (Institute of Electrical and Electronics Engineers) que subsidie esta definição. Em seguida fazer uma explanação breve e objetiva sobre as principais características, funcionalidades e o que difere um sistema embarcado de um computador de propósito geral.* 
 
