@@ -6,14 +6,19 @@
 
 *No simulador EdSim51, digite e execute (clicando em “Assm”) as instruções abaixo:*
 
+``` 
 MOV R0, #22h
-
 MOV 00h, #22h
+```
 
 *Qual é a diferença entre as duas instruções acima? Tente refletir porque possuem ciclos de máquina diferentes se a operação é realizada na mesma posição de memória RAM (00h ou R0 usa o mesmo espaço).*
 
+
+
+``` 
 MOV A, #22h
 MOV ACC, #22h
+```
 
 *Qual é a diferença entre as duas instruções acima? Tente refletir sobre a diferença de usar A ou ACC e sobre porque possuem ciclos de máquina diferentes se a operação realizada é a mesma.*
 
