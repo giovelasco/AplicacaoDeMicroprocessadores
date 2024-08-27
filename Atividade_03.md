@@ -15,7 +15,7 @@ MOV 00h, #22h
 
 Por mais que a operação seja realizada no mesmo espaço de memória, o set de instruções do 8051 possui múltiplas instruções do tipo MOV. Dentre elas, existe uma instrução que move um dado diretamente para o registrador R0, sem precisar especificar o local de destino na instrução. Essa instrução corresponde ao opcode 0x78, que necessita de apenas 2 bytes na memória de programa. Já a operação MOV de opcode 0x75 move um dado para um endereço de memória que precisa ser especificado na instrução depois, ocupando 3 bytes na memória de programa.
 
-Portanto, a instrução MOV R0, #22h utiliza um ciclo por não precisar buscar novamente na memória de programa qual é o endereço de destino do dado, uma vez que isso já está definido no próprio opcode. Já a instrução MOV 00h, #22h utiliza cois ciclos por precisat buscar o enredeço de destino na memória de programa, uma vez que o endereço de destino não foi especificado pelo opcode.
+Portanto, a instrução MOV R0, #22h utiliza um ciclo por não precisar buscar novamente na memória de programa o endereço de destino do dado, uma vez que isso já está definido no próprio opcode. Já a instrução MOV 00h, #22h utiliza dois ciclos por precisar buscar o enredeço de destino na memória de programa, uma vez que o endereço de destino não foi especificado pelo opcode.
 
 ``` 
 MOV A, #22h
