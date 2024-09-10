@@ -24,6 +24,8 @@ MOV ACC, #22h
 
 *Qual é a diferença entre as duas instruções acima? Tente refletir sobre a diferença de usar A ou ACC e sobre porque possuem ciclos de máquina diferentes se a operação realizada é a mesma.*
 
+O motivo é semelhante ao anterior: a operação MOV A, #22 move o dado diretamente para o registrador A (acumulador), o que exige apenas 2 bytes de memória. Já a operação MOV ACC, #22h move o dado para o local de memória do registrador Acumulador. Assim, essa operação corresponde a mover um dado para um endereço de memória que deve ser especificado, ocupando 3 bytes.
+
 
 ### Questão 9
 
