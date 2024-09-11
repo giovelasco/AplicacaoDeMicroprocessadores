@@ -5,7 +5,7 @@
 ## Atividade 1
 
 ### Transferência de Dados
-Código em Assembly:
+Código para o 3081:
 
 ```assembly
 org	0000h
@@ -38,7 +38,7 @@ Questões:
 
 
 ### Instruções Aritméticas
-Código em Assembly:
+Código para o 3081:
 
 ```assembly
 org	0000h
@@ -78,11 +78,15 @@ Questões:
 *2. Tente decrementar 1 unidade de algum registrador ou endereço de memória cujo valor é igual a zero (ex.: DEC A, DEC Rn, ou DEC 60h, sendo A, Rn, ou 60h iguais a zero). Por que a operação resulta em FF?*
 
 ### Instruções Lógicas e Booleanas
+Código para o 3081:
+
 ```assembly
 
 ```
 
 ### Instruções de Desvio Condicional e Incondicional
+Código para o 3081:
+
 ```assembly
 
 ```
