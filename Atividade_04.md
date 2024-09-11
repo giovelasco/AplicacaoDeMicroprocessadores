@@ -21,7 +21,7 @@ main:
 	MOV 	0X50b, R4	; Move o valor em R4 para o endereço 0x50
 	MOV 	R1, 0x50b	; Move o valor  0x50 para R1
 	MOV 	A, @R1		; Move R1 de forma indireta para ACC
-	MOV 	DPTR, #0X9A5b	; Move o valor 0X9A5 em binário para DPTR
+	MOV 	DPTR, #0X9A5B	; Move o valor 0X9A5B para DPTR
 ```
 Questões:
 
