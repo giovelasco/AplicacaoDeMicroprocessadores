@@ -4,7 +4,7 @@
 
 ## Atividade 1
 
-### Transferência de Dados:
+### Transferência de Dados
 Código em Assembly:
 
 ```assembly
@@ -37,7 +37,7 @@ Questões:
 *(d) Por que foi possível mover um valor de 4 dígitos para DPTR? Em quais registradores especiais do simulador foi possível verificar mudanças quando essa operação foi realizada? Qual o maior valor que pode ser movido para DPTR em hexadecimal?*
 
 
-### Instruções Aritméticas:
+### Instruções Aritméticas
 Código em Assembly:
 
 ```assembly
