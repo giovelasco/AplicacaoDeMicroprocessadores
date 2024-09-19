@@ -8,39 +8,39 @@
 Código para o 3081:
 
 ```assembly
-      org	0000h
+org	0000h
        
-      main:
-0000| 	MOV	A, #12h		; Move o valor 12 para ACC
-0002| 	MOV	A, #00h		; Move o valor 00 para ACC
-0004| 	MOV 	R2, #34h	; Move o valor 34 para o R2 no Banco 0
-0006| 	MOV	B, #56		; Move o valor 56 em binário para B
-0009| 	MOV 	0x40, P1	; Move o conteúdo da porta P1 para o enredeço 0x40
-000C| 	SETB	RS0		; Seta o bit RS0 em 1
-000E| 	MOV 	R4, #0x40	; Move o valor 04x0 para R4 no Banco 1
-0010| 	MOV 	0X50, R4	; Move o conteúdo de R4 para o endereço 0x50
-0012| 	MOV 	R1, 0x50	; Move o conteúdo do enderedeço 0x50 para R1
-0014| 	MOV 	A, @R1		; Move o conteúdo do endereço armazenado em R1 para ACC
-0015| 	MOV 	DPTR, #0X9A5B	; Move o valor 0X9A5B para 
+main:
+	MOV	A, #12h		; Move o valor 12 para ACC
+	MOV	A, #00h		; Move o valor 00 para ACC
+ 	MOV 	R2, #34h	; Move o valor 34 para o R2 no Banco 0
+ 	MOV	B, #56		; Move o valor 56 em binário para B
+	MOV 	0x40, P1	; Move o conteúdo da porta P1 para o endereço 0x40
+	SETB	RS0		; Seta o bit RS0 em 1
+	MOV 	R4, #0x40	; Move o valor 04x0 para R4 no Banco 1
+ 	MOV 	0X50, R4	; Move o conteúdo de R4 para o endereço 0x50
+ 	MOV 	R1, 0x50	; Move o conteúdo do enderedeço 0x50 para R1
+	MOV 	A, @R1		; Move o conteúdo do endereço armazenado em R1 para ACC
+	MOV 	DPTR, #0X9A5B	; Move o valor 0X9A5B para DPTR
 ```
 Questões:
 
 *(a) Qual foi o tempo gasto em cada linha de instrução e quantos ciclos de máquina esse programa contém? Justifique sua resposta.*
 
 ```assembly
-	MOV	A, #12h		; Tempo: 1us
-	MOV	A, #00h		; Tempo: 1us
-	MOV 	R2, #34h	; Tempo: 1us
-	MOV	B, #56		; Tempo: 2us
-	MOV 	0x40, P1	; Tempo: 2us
-	SETB	RS0		; Tempo: 1us
-	MOV 	R4, #0x40	; Tempo: 1us
-	MOV 	0X50, R4	; Tempo: 1us
-	MOV 	R1, 0x50	; Tempo: 2us
-	MOV 	A, @R1		; Tempo: 1us
-	MOV 	DPTR, #0X9A5B	; Tempo: 2us
+	MOV	A, #12h		; Tempo: 1𝜇𝑠
+	MOV	A, #00h		; Tempo: 1𝜇𝑠
+	MOV 	R2, #34h	; Tempo: 1𝜇𝑠
+	MOV	B, #56		; Tempo: 2𝜇𝑠
+	MOV 	0x40, P1	; Tempo: 2𝜇𝑠
+	SETB	RS0		; Tempo: 1𝜇𝑠
+	MOV 	R4, #0x40	; Tempo: 1𝜇𝑠
+	MOV 	0X50, R4	; Tempo: 2𝜇𝑠
+	MOV 	R1, 0x50	; Tempo: 2𝜇𝑠
+	MOV 	A, @R1		; Tempo: 1𝜇𝑠
+	MOV 	DPTR, #0X9A5B	; Tempo: 2𝜇𝑠
 ```
-Considerando que cada ciclo de máquina tem duração de 1us, o programa contém 16 ciclos de máquina no total.
+Considerando que cada ciclo de máquina tem duração de $1 \mu s$, o programa contém 16 ciclos de máquina no total.
 
 <br>
 
@@ -52,7 +52,7 @@ Cada bit da porta foi copiado para os bits do endereço de memória. Seu valor �
 
 *(c) Qual valor apareceu no acumulador após ter movido R1 de forma indireta para ele?*
 
-Após mover R1 indiretamente para o ACC, o valor de ACC é FF. Isso ocorre porque o valor armazenado em R1 nesse momento é 0x40 e nesse endereço de memória foi armazenada a porta P1, com todos seus bits iguais a 1.
+Após mover R1 indiretamente para o ACC, o valor de ACC é FF. Isso ocorre porque o valor armazenado em R1 nesse momento é 0x40 e nesse endereço de memória está armazenado FF, já que a porta P1 foi copiada para esse endereço com todos seus bits iguais a 1.
 
 <br>
 
@@ -142,5 +142,3 @@ bloco3:
 	JMP	inicio		; Retorna para o inicio
 
 ```
-
-; Duvidas: os registradores, quando não é especificado, estão no banco 0?
