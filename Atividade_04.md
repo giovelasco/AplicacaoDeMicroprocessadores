@@ -15,7 +15,7 @@ Código para o 3081:
 0002| 	MOV	A, #00h		; Move o valor 00 para ACC
 0004| 	MOV 	R2, #34h	; Move o valor 34 para o R2 no Banco 0
 0006| 	MOV	B, #56		; Move o valor 56 em binário para B
-0009| 	MOV 	0x40, P1	; Move o conteúdo de P1 para o enredeço 0x40
+0009| 	MOV 	0x40, P1	; Move o conteúdo da porta P1 para o enredeço 0x40
 000C| 	SETB	RS0		; Seta o bit RS0 em 1
 000E| 	MOV 	R4, #0x40	; Move o valor 04x0 para R4 no Banco 1
 0010| 	MOV 	0X50, R4	; Move o conteúdo de R4 para o endereço 0x50
@@ -58,6 +58,7 @@ Após mover R1 indiretamente para o ACC, o valor de ACC é FF. Isso ocorre porqu
 
 *(d) Por que foi possível mover um valor de 4 dígitos para DPTR? Em quais registradores especiais do simulador foi possível verificar mudanças quando essa operação foi realizada? Qual o maior valor que pode ser movido para DPTR em hexadecimal?*
 
+O DPTR é um registrador especial interno à RAM chamado Data Pointer, que utiliza dois registradores de 8 bits (DPH e DPL) nesta ordem para endereçar qualquer valor possível de memória externa. É possível mover um valor de 4 dígitor pois o DTPR possui 16 bits no total, já o 8051 possui endereçamento de até 64 Kbytes de memória de dados externa. Quando a intrução MOV DPTR, #0X9A5B é executada, o registrador DPH recebeu o valor 0x9A e Dpl recebeu 0x5B O maior em hexadecimal que pode ser movido em hexadecimal é 0xFFFF.
 
 <br>
 
@@ -76,15 +77,11 @@ main:
 	INC	B		; Incrementa B em 1
 	SUBB	A, B		; Subtrai o valor de B do valor de A
 	MUL	AB		; Multiplica A e B
-
 	INC 	B		; Incrementa o valor de B em 1
 	INC 	B		; Incrementa o valor de B em 1
-
 	DIV 	AB		; Divide A por B
 	MOV 	0x70, A		; Move o conteúdo de A para o endereço 0x70
 	MOV 	0x71, B		; Move o conteúdo de B para o endereço 0x71
-	
-
 	MOV	A, 0b11001100	; Move o valor 0b11001100 para ACC
 	MOV	B, 0b10101010	; Move o valor 0b10101010 para B
 	ANL	A, B		; Realiza o AND lógico entre ACC e B
@@ -108,17 +105,17 @@ Código para o 3081:
 org	0000h
 
 main:
-	MOV  A, #11001100B	; Move o valor 0b11001100 para ACC
+	MOV	A, #11001100B	; Move o valor 0b11001100 para ACC
 	MOV	B, #10101010B	; Move o valor 0b10101010 para B
-	ANL A, B	; Realiza o AND lógico entre A e B
-	RR		A	; Rotaciona o ACC à direita em 1 bit
-	RR		A	; Rotaciona o ACC à direita em 1 bit
-	CPL A	; Realiza o complemento de ACC
-	RL		A	; Rotaciona o ACC à esquerda em 1 bit
-	RL		A	; Rotaciona o ACC à esquerda em 1 bit
-	ORL A, B	; Realiza o OR lógico entre A e B
-	XRL A, B	; Realiza o XOR lógico entre A e B
-	SWAP A		; Troca os bits de 0-3 com os bits de 4-7 no ACC
+	ANL	A, B		; Realiza o AND lógico entre A e B
+	RR	A		; Rotaciona o ACC à direita em 1 bit
+	RR	A		; Rotaciona o ACC à direita em 1 bit
+	CPL 	A		; Realiza o complemento de ACC
+	RL	A		; Rotaciona o ACC à esquerda em 1 bit
+	RL	A		; Rotaciona o ACC à esquerda em 1 bit
+	ORL	A, B		; Realiza o OR lógico entre A e B
+	XRL 	A, B		; Realiza o XOR lógico entre A e B
+	SWAP 	A		; Troca os bits de 0-3 com os bits de 4-7 no ACC
 ```
 
 ### Instruções de Desvio Condicional e Incondicional
