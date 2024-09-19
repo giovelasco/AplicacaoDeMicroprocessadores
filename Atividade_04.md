@@ -8,20 +8,20 @@
 Código para o 3081:
 
 ```assembly
-org	0000h
-
-main:
-	MOV	A, #12h		; Move o valor 12 para ACC
-	MOV	A, #00h		; Move o valor 00 para ACC
-	MOV 	R2, #34h	; Move o valor 34 para o R2 no Banco 0
-	MOV	B, #56		; Move o valor 56 em binário para B
-	MOV 	0x40b, P1	; Move o valor em P1 para o enredeço 0x40
-	SETB	RS0		; Seta o bit RS0 em 1
-	MOV 	R4, #0x40b	; Move o valor 04x0 para R4 no Banco 1
-	MOV 	0X50b, R4	; Move o valor em R4 para o endereço 0x50
-	MOV 	R1, 0x50b	; Move o valor  0x50 para R1
-	MOV 	A, @R1		; Move R1 de forma indireta para ACC
-	MOV 	DPTR, #0X9A5B	; Move o valor 0X9A5B para DPTR
+      org	0000h
+       
+      main:
+0000| 	MOV	A, #12h		; Move o valor 12 para ACC
+0002| 	MOV	A, #00h		; Move o valor 00 para ACC
+0004| 	MOV 	R2, #34h	; Move o valor 34 para o R2 no Banco 0
+0006| 	MOV	B, #56		; Move o valor 56 em binário para B
+0009| 	MOV 	0x40, P1	; Move o conteúdo de P1 para o enredeço 0x40
+000C| 	SETB	RS0		; Seta o bit RS0 em 1
+000E| 	MOV 	R4, #0x40	; Move o valor 04x0 para R4 no Banco 1
+0010| 	MOV 	0X50, R4	; Move o conteúdo de R4 para o endereço 0x50
+0012| 	MOV 	R1, 0x50	; Move o conteúdo do enderedeço 0x50 para R1
+0014| 	MOV 	A, @R1		; Move o conteúdo do endereço armazenado em R1 para ACC
+0015| 	MOV 	DPTR, #0X9A5B	; Move o valor 0X9A5B para 
 ```
 Questões:
 
@@ -32,11 +32,11 @@ Questões:
 	MOV	A, #00h		; Tempo: 1us
 	MOV 	R2, #34h	; Tempo: 1us
 	MOV	B, #56		; Tempo: 2us
-	MOV 	0x40b, P1	; Tempo: 2us
+	MOV 	0x40, P1	; Tempo: 2us
 	SETB	RS0		; Tempo: 1us
-	MOV 	R4, #0x40b	; Tempo: 1us
-	MOV 	0X50b, R4	; Tempo: 1us
-	MOV 	R1, 0x50b	; Tempo: 2us
+	MOV 	R4, #0x40	; Tempo: 1us
+	MOV 	0X50, R4	; Tempo: 1us
+	MOV 	R1, 0x50	; Tempo: 2us
 	MOV 	A, @R1		; Tempo: 1us
 	MOV 	DPTR, #0X9A5B	; Tempo: 2us
 ```
@@ -46,10 +46,13 @@ Considerando que cada ciclo de máquina tem duração de 1us, o programa contém
 
 *(b) O que aconteceu ao mover uma porta inteira de 8 registradores (ex.: MOV A, P1) para um destino e por que seu valor é FF?*
 
+Cada bit da porta foi copiado para os bits do endereço de memória. Seu valor é FF pois todos os 8 bits em valor têm valor 1 e, assim, o número hexadecimal correspondente é FF.
+
 <br>
 
 *(c) Qual valor apareceu no acumulador após ter movido R1 de forma indireta para ele?*
 
+Após mover R1 indiretamente para o ACC, o valor de ACC é FF. Isso ocorre porque o valor armazenado em R1 nesse momento é 0x40 e nesse endereço de memória foi armazenada a porta P1, com todos seus bits iguais a 1.
 
 <br>
 
