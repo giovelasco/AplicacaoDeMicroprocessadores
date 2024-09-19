@@ -173,7 +173,7 @@ loop_1:
 	
 loop_2:
 	INC	R0			; Incrementa o valor de R0
-	CJNE	R0, #24h, loop_1	; Se os valor armazenado em R0 for diferente de 24h salta para loop_1
+	CJNE	R0, #24h, loop_1	; Se o valor armazenado em R0 for diferente de 24h salta para loop_1
 	NOP				; Espera um ciclo
 	JMP	$			; Segura o programa na última linha
 ```
