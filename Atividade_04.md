@@ -153,8 +153,6 @@ bloco3:
 
 ## Atividade 2
 
-### Instruções de Desvio Condicional e Incondicional
-
 #### Código para o 3081:
 
 ```assembly
@@ -178,5 +176,5 @@ loop_2:
 	JMP	$			; Segura o programa na última linha
 ```
 
-O programa verifica as posições de memória de 0x20 até 0x23, verificando quais valores armazenados nessas posições são menores que 45h. A quantidade de números menores que 45h são armezanados no registrador R1.
+O programa verifica as posições de memória de 0x20 até 0x23, verificando quais valores armazenados nessas posições são menores que 45h. Caso o número seja menor que 45, sua subtração no ACC terá um carry no PSW, que gera um salto para contabilizar esse número no registrador R1. Assim, a quantidade de números menores que 45h sãa armazenados no R1.
 
