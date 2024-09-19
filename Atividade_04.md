@@ -161,21 +161,21 @@ bloco3:
 org	0000h
 
 main:
-	org	33h		; Origem em 33h
-	MOV	R0, #20h	; Move de forma imediata o valor 20h para R0
-	MOV	R1, #00h	; Move de forma imediata o valor 00h para R1
+	org	33h			; Origem em 33h
+	MOV	R0, #20h		; Move de forma imediata o valor 20h para R0
+	MOV	R1, #00h		; Move de forma imediata o valor 00h para R1
 
 loop_1:
-	MOV	A, @R0		; Move o conteúdo presente no endereço armazenado R0 para ACC
-	SUBB	A, #45h		; Subtrai 45h de ACC
-	JNC	loop_2		; Se não houver carry, salta para loop_2
-	INC	R1		; Incrementa o valor de R1
+	MOV	A, @R0			; Move o conteúdo presente no endereço armazenado R0 para ACC
+	SUBB	A, #45h			; Subtrai 45h de ACC
+	JNC	loop_2			; Se não houver carry, salta para loop_2
+	INC	R1			; Incrementa o valor de R1
 	
 loop_2:
-	INC	R0		; Incrementa o valor de R0
-	CJNE R0, #24h, loop_1	; Se os valor armazenado em R0 for diferente de 24h salta para loop_1
-	NOP			; Espera um ciclo
-	JMP	$		; Segura o programa na última linha
+	INC	R0			; Incrementa o valor de R0
+	CJNE	R0, #24h, loop_1	; Se os valor armazenado em R0 for diferente de 24h salta para loop_1
+	NOP				; Espera um ciclo
+	JMP	$			; Segura o programa na última linha
 ```
 
 O programa verifica as posições de memória de 0x20 até 0x23, verificando quais valores armazenados nessas posições são menores que 45h. A quantidade de números menores que 45h são armezanados no registrador R1.
