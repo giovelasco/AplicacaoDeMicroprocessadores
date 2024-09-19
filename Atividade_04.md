@@ -5,7 +5,7 @@
 ## Atividade 1
 
 ### Transferência de Dados
-Código para o 3081:
+#### Código para o 3081:
 
 ```assembly
 org	0000h
@@ -22,8 +22,10 @@ main:
  	MOV 	R1, 0x50	; Move o conteúdo do enderedeço 0x50 para R1
 	MOV 	A, @R1		; Move o conteúdo do endereço armazenado em R1 para ACC
 	MOV 	DPTR, #0X9A5B	; Move o valor 0X9A5B para DPTR
+	JMP	$		; Segura o programa na última linha
+	END			; Encerra o programa
 ```
-Questões:
+#### Questões:
 
 *(a) Qual foi o tempo gasto em cada linha de instrução e quantos ciclos de máquina esse programa contém? Justifique sua resposta.*
 
@@ -63,7 +65,7 @@ O DPTR é um registrador especial interno à RAM chamado Data Pointer, que utili
 <br>
 
 ### Instruções Aritméticas
-Código para o 3081:
+#### Código para o 3081:
 
 ```assembly
 org	0000h
@@ -82,9 +84,11 @@ main:
 	DIV 	AB		; Divide A por B
 	MOV 	0x70, A		; Move o conteúdo de A para o endereço 0x70
 	MOV 	0x71, B		; Move o conteúdo de B para o endereço 0x71
+	JMP	$		; Segura o programa na última linha
+	END			; Encerra o programa
 ```
 
-Questões:
+#### Questões:
 
 *(e) Faça os seguintes testes em um programa a parte:*
 
@@ -97,7 +101,7 @@ Questões:
 <br>
 
 ### Instruções Lógicas e Booleanas
-Código para o 3081:
+#### Código para o 3081:
 
 ```assembly
 org	0000h
@@ -114,12 +118,14 @@ main:
 	ORL	A, B		; Realiza o OR lógico entre A e B
 	XRL 	A, B		; Realiza o XOR lógico entre A e B
 	SWAP 	A		; Troca os bits de 0-3 com os bits de 4-7 no ACC
+	JMP	$		; Segura o programa na última linha
+	END			; Encerra o programa
 ```
 
 <br>
 
 ### Instruções de Desvio Condicional e Incondicional
-Código para o 3081:
+#### Código para o 3081:
 
 ```assembly
 org	0000h
@@ -140,4 +146,37 @@ bloco2:
 bloco3:
 	DJNZ	R0, bloco3	; Decrementa R0 e salta para bloco3 se R0 diferente de 0
 	JMP	inicio		; Retorna para o inicio
+
 ```
+
+<br>
+
+## Atividade 2
+
+### Instruções de Desvio Condicional e Incondicional
+
+#### Código para o 3081:
+
+```assembly
+org	0000h
+
+main:
+	org	33h		; Origem em 33h
+	MOV	R0, #20h	; Move de forma imediata o valor 20h para R0
+	MOV	R1, #00h	; Move de forma imediata o valor 00h para R1
+
+loop_1:
+	MOV	A, @R0		; Move o conteúdo presente no endereço armazenado R0 para ACC
+	SUBB	A, #45h		; Subtrai 45h de ACC
+	JNC	loop_2		; Se não houver carry, salta para loop_2
+	INC	R1		; Incrementa o valor de R1
+	
+loop_2:
+	INC	R0		; Incrementa o valor de R0
+	CJNE R0, #24h, loop_1	; Se os valor armazenado em R0 for diferente de 24h salta para loop_1
+	NOP			; Espera um ciclo
+	JMP	$		; Segura o programa na última linha
+```
+
+O programa verifica as posições de memória de 0x20 até 0x23, verificando quais valores armazenados nessas posições são menores que 45h. A quantidade de números menores que 45h são armezanados no registrador R1.
+
