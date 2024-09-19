@@ -69,9 +69,9 @@ Código para o 3081:
 org	0000h
 
 main:
-	MOV 	ACC, #02h	; Move o valor 2 para ACC
-	MOV 	B, #03h		; Move o valor 3 para B
-	MOV	R4, #07h	; Move o valor 7 para o R4
+	MOV 	ACC, #02h	; Move o valor 2 de forma imediata para ACC
+	MOV 	B, #03h		; Move o valor 3 de forma imediata para B
+	MOV	R4, #07h	; Move o valor 7 de forma imediata para o R4
 	ADD	A, R4		; Soma o conteúdo de ACC com R4
 	SUBB	A, #03h		; Subtrai 3 do valor de ACC
 	INC	B		; Incrementa B em 1
@@ -82,11 +82,6 @@ main:
 	DIV 	AB		; Divide A por B
 	MOV 	0x70, A		; Move o conteúdo de A para o endereço 0x70
 	MOV 	0x71, B		; Move o conteúdo de B para o endereço 0x71
-	MOV	A, 0b11001100	; Move o valor 0b11001100 para ACC
-	MOV	B, 0b10101010	; Move o valor 0b10101010 para B
-	ANL	A, B		; Realiza o AND lógico entre ACC e B
-	RR	A		; Rotaciona ACC à direita em 1 bit
-	RR	A		; Rotaciona ACC à direita em 1 bit
 ```
 
 Questões:
@@ -95,8 +90,11 @@ Questões:
 
 *1. Por que ao mover o valor 4 para ACC, o bit menos significativo de PSW resulta em 1; e ao mover o valor 3, esse bit resulta em 0?*
 
+<br>
 
 *2. Tente decrementar 1 unidade de algum registrador ou endereço de memória cujo valor é igual a zero (ex.: DEC A, DEC Rn, ou DEC 60h, sendo A, Rn, ou 60h iguais a zero). Por que a operação resulta em FF?*
+
+<br>
 
 ### Instruções Lógicas e Booleanas
 Código para o 3081:
@@ -105,11 +103,11 @@ Código para o 3081:
 org	0000h
 
 main:
-	MOV	A, #11001100B	; Move o valor 0b11001100 para ACC
-	MOV	B, #10101010B	; Move o valor 0b10101010 para B
-	ANL	A, B		; Realiza o AND lógico entre A e B
-	RR	A		; Rotaciona o ACC à direita em 1 bit
-	RR	A		; Rotaciona o ACC à direita em 1 bit
+	MOV	A, #11001100b	; Move o valor 11001100 em binário de forma imediata para ACC
+	MOV	B, #10101010b	; Move o valor 10101010 em binário de forma imediata para B
+	ANL	A, B		; Realiza o AND lógico entre ACC e B
+	RR	A		; Rotaciona ACC à direita em 1 bit
+	RR	A		; Rotaciona ACC à direita em 1 bit
 	CPL 	A		; Realiza o complemento de ACC
 	RL	A		; Rotaciona o ACC à esquerda em 1 bit
 	RL	A		; Rotaciona o ACC à esquerda em 1 bit
@@ -117,6 +115,8 @@ main:
 	XRL 	A, B		; Realiza o XOR lógico entre A e B
 	SWAP 	A		; Troca os bits de 0-3 com os bits de 4-7 no ACC
 ```
+
+<br>
 
 ### Instruções de Desvio Condicional e Incondicional
 Código para o 3081:
@@ -140,5 +140,4 @@ bloco2:
 bloco3:
 	DJNZ	R0, bloco3	; Decrementa R0 e salta para bloco3 se R0 diferente de 0
 	JMP	inicio		; Retorna para o inicio
-
 ```
