@@ -60,7 +60,7 @@ Após mover R1 indiretamente para o ACC, o valor de ACC é FF. Isso ocorre porqu
 
 *(d) Por que foi possível mover um valor de 4 dígitos para DPTR? Em quais registradores especiais do simulador foi possível verificar mudanças quando essa operação foi realizada? Qual o maior valor que pode ser movido para DPTR em hexadecimal?*
 
-O DPTR é um registrador especial interno à RAM chamado Data Pointer, que utiliza dois registradores de 8 bits (DPH e DPL) nesta ordem para endereçar qualquer valor possível de memória externa. É possível mover um valor de 4 dígitos pois o DTPR possui 16 bits no total, já que o 8051 possui endereçamento de até 64 Kbytes de memória de dados externa. Quando a intrução MOV DPTR, #0X9A5B é executada, o registrador DPH recebeu o valor 0x9A e Dpl recebeu 0x5B. O maior valor em hexadecimal que pode ser movido em é 0xFFFF.
+O DPTR é um registrador especial interno à RAM chamado Data Pointer, que utiliza dois registradores de 8 bits (DPH e DPL) nesta ordem para endereçar qualquer valor possível de memória externa. É possível mover um valor de 4 dígitos pois o DTPR possui 16 bits no total, já que o 8051 possui endereçamento de até 64 Kbytes de memória de dados externa. Quando a intrução MOV DPTR, #0X9A5B é executada, o registrador DPH recebeu o valor 0x9A e DPL recebeu 0x5B. O maior valor em hexadecimal que pode ser movido em é 0xFFFF.
 
 <br>
 
