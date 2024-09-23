@@ -94,9 +94,13 @@ main:
 
 *1. Por que ao mover o valor 4 para ACC, o bit menos significativo de PSW resulta em 1; e ao mover o valor 3, esse bit resulta em 0?*
 
+O dígito menos significativo do PSW é a Parity Flag, que indica se há um número par ou ímpar de 1s no valor em binário do acumulador. Portanto, quando o valor em ACC é 4, a flag de paridade é 0, já que há dois 1s em ACC. Quando movemos o valor 3, o valor em ACC é formado por apenas um 1 e, assim, a flag de paridade é 1, monstrando que há um número ímpar de 1s no valor de ACC. 
+
 <br>
 
 *2. Tente decrementar 1 unidade de algum registrador ou endereço de memória cujo valor é igual a zero (ex.: DEC A, DEC Rn, ou DEC 60h, sendo A, Rn, ou 60h iguais a zero). Por que a operação resulta em FF?*
+
+A operação resulta em 0xFF pois o microprocessador opera em um sistema de numeração binário de 8 bits e, ao decrementar um valor 0, ele "volta" ao maior valor representável em 8 bits, que é equivalente a FF em hexadecimal.
 
 <br>
 
