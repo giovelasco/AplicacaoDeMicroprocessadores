@@ -94,7 +94,7 @@ main:
 
 *1. Por que ao mover o valor 4 para ACC, o bit menos significativo de PSW resulta em 1; e ao mover o valor 3, esse bit resulta em 0?*
 
-O dígito menos significativo do PSW é a Parity Flag, que indica se há um número par ou ímpar de 1s no valor em binário do acumulador. Portanto, quando o valor em ACC é 4, a flag de paridade é 0, já que há dois 1s em ACC. Quando movemos o valor 3, o valor em ACC é formado por apenas um 1 e, assim, a flag de paridade é 1, monstrando que há um número ímpar de 1s no valor de ACC. 
+O dígito menos significativo do PSW é a Parity Flag, que indica se há um número par ou ímpar de 1s no valor em binário do acumulador. Portanto, quando o valor em ACC é 4, a flag de paridade é 1, já que há um 1 no binário em ACC, que é um valor ímpar. Quando movemos o valor 3, o valor em ACC é formado por dois 1s e, assim, a flag de paridade é 0, monstrando que há um número par de 1s no valor de ACC. 
 
 <br>
 
@@ -182,5 +182,5 @@ loop_2:
 	END				; Encerra o programa
 ```
 
-O programa verifica as posições de memória de 0x20 até 0x23, verificando quais valores armazenados nessas posições são menores que 45h. Caso o número seja menor que 45, sua subtração no ACC terá um carry no PSW, que gera um salto para contabilizar esse número no registrador R1. Assim, a quantidade de números menores que 45h sãa armazenados no R1.
+O programa verifica as posições de memória de 0x20 até 0x23, verificando quais valores armazenados nessas posições são menores que 45h. Caso o número seja menor que 45, sua subtração no ACC terá um carry no PSW, o que gera um salto para contabilizar esse número no registrador R1. Assim, a quantidade de números menores que 45h sãa armazenados em R1.
 
