@@ -178,6 +178,8 @@ loop_2:
 	CJNE	R0, #24h, loop_1	; Se o valor armazenado em R0 for diferente de 24h salta para loop_1
 	NOP				; Espera um ciclo
 	JMP	$			; Segura o programa na última linha
+
+	END				; Encerra o programa
 ```
 
 O programa verifica as posições de memória de 0x20 até 0x23, verificando quais valores armazenados nessas posições são menores que 45h. Caso o número seja menor que 45, sua subtração no ACC terá um carry no PSW, que gera um salto para contabilizar esse número no registrador R1. Assim, a quantidade de números menores que 45h sãa armazenados no R1.
