@@ -161,9 +161,10 @@ bloco3:
 
 ```assembly
 org	0000h
+JMP	main
 
+org 0033h
 main:
-	org	33h			; Origem em 33h
 	MOV	R0, #20h		; Move de forma imediata o valor 20h para R0
 	MOV	R1, #00h		; Move de forma imediata o valor 00h para R1
 
