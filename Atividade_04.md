@@ -166,7 +166,6 @@ JMP	main
 org 0033h
 main:
 	MOV	R0, #20h		; Move de forma imediata o valor 20h para R0
-	MOV	R1, #00h		; Move de forma imediata o valor 00h para R1
 
 loop_1:
 	MOV	A, @R0			; Move o conteúdo presente no endereço armazenado R0 para ACC
