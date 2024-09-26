@@ -84,7 +84,7 @@ armazena_switch:
     MOV R0, 50H                       ; Armazena o número do switch pressionado em R0
     SJMP loop_inicial                 ; Volta ao loop_inicial
 
-END		                                ; Encerra o programa
+END		                              ; Encerra o programa
 ```
 
 <br>
