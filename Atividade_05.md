@@ -15,13 +15,13 @@
 
 (V) As instruções PUSH e POP são exclusivas para operações com pilha.
 
-(V) A instrução CALL <endereço> deve ser usada para indicar qual endereço o programa deve desviar no caso de um atendimento à interrupção ou chamada de sub-rotina.
+(F) A instrução CALL <endereço> deve ser usada para indicar qual endereço o programa deve desviar no caso de um atendimento à interrupção ou chamada de sub-rotina.
 
 (V) A instrução RET, colocada no final de uma sub-rotina, faz com que o último endereço armazenado na pilha seja carregado no registrador PC (program counter).
 
 (F) A área da RAM interna dedicada à pilha é determinada pelo ponteiro SP, um dos SFRs, que possui tamanho 8 bits, mesmo tamanho do barramento de endereço da CPU.
 
-( ) Geralmente são baseadas em flip-flops tipo D (?)
+(F) Geralmente são baseadas em flip-flops tipo D
 
 <br>
 
@@ -29,16 +29,63 @@
 
 *Refletir se existe diferença entre o endereço armazenado em um espaço de pilha e o endereço armazenado no Stack Pointer (SP)?*
 
+É importante ressaltar que o Stack Pointer é um registrador especial que armazena o enredeço do valor que se encontra no topo da pilha. Já os endereços do espaço de pilha estão em uma parte da memória RAM, e nela são armazenados os endereços para os quais o programa deve retornar posteriormente. Assim, o endereço do Stack Pointer aponta para a pilha, enquanto os endereços para o programa estão contidos na pilha.
+
 <br>
 
 ### Questão 12
 
 Supondo que um banco de 8 LEDs foi conectado à Porta P1 e um banco de 8 Switches conectado à P2 (EdSim51). Acender o LED 0 (pode ser qualquer outro) ao acionar o Switch 7 (pode ser qualquer outro). Apagar o LED ao desligar o Switch.
 
+```assembly
+org	0000h
+
+loop_ligar:
+    MOV   A, P2                 ; Move os valores dos Switches para o acumulador
+    JB    ACC.7, loop_desligar  ; Se o bit do Switch 7 for 1 (desligado), saltar para o loop_desligar
+    CLR   P1.0                  ; Coloca bit 0 dos LEDs em 0 (ligado)
+    SJMP  loop_ligar            ; Retorna para o loop_ligar
+    
+loop_desligar:
+    SETB  P1.0                  ; Se o bit do Switch 7 for 1 (desligado) apaga o LED 0
+    SJMP  loop_ligar            ; Retorna para o loop_ligar
+
+END                             ; Encerra o programa
+```
+
 <br>
 
 ### Questão 13
 Supondo que foram conectados um banco de 8 switches na Porta P2 (EdSim51). Escrever um programa em Assembly para monitorar, quando uma das chaves for pressionada, e indicar o número da chave pressionada em R0 (Se SW3 foi pressionada, então R0 = 3).
+
+```assembly
+org		0000h                          
+
+main:
+    MOV  R0, #0                      ; Inicializa R0 com 00h - mostra o número do switch pressionado
+    MOV  50H, #0                     ; Inicia a posicao 50h com 00h - será utilizada como contador para verificar o número do switch
+
+loop_inicial:
+    MOV  A, P2                       ; Carrega o valor da Porta P2 (switches) no acumulador
+    CJNE  A, #0FFH, verifica_switch  ; Se alguma chave estiver pressionada (tiver valor 0), salta para o loop para verificar o número do switch
+    SJMP  loop_inicial               ; Se nenhuma chave estiver pressionada, dá um salto curto de volta para o loop_inicial
+
+verifica_switch:
+    MOV  50H, #00                     ; Inicializa o contador no endereço de memória 50h com 00h
+
+numero_switch:
+    MOV  C, ACC.0                     ; Move o estado do bit 0 do acumulador para o carry
+    JNC  armazena_switch              ; Se o bit for 0 (ativado), salta para armazenar o número contado até então em R0
+    INC  50H                          ; Se o bit for 1 (desativado), incrementa o contador R1
+    RR  A                             ; Rotaciona o acumulador para a direita, para verificar o próximo bit
+    SJMP  numero_switch               ; Repete o processo para o próximo switch
+
+armazena_switch:
+    MOV R0, 50H                       ; Armazena o número do switch pressionado em R0
+    SJMP loop_inicial                 ; Volta ao loop_inicial
+
+END		                                ; Encerra o programa
+```
 
 <br>
 
