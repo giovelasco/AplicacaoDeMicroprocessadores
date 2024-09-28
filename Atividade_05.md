@@ -99,7 +99,7 @@ main:
     ACALL	delay            ; Chama a função que realiza o delay de 50 milissegundos
 
 delay:
-	MOV		R1, #100         ; M
+	MOV	R1, #100         ; Move o valor 100 para R1
 
 loop_delay:
 	MOV 	R0, #250         ; Move o valor 250 para R0 
@@ -125,19 +125,27 @@ Leitura:
   JNB   P2.1, PY
   JNB    P2.2, PZ
   LCALL   Leitura
-  PX:
+
+PX:
   MOV   P1, #0
   RET
-  PY:
+
+PY:
   MOV   P1, #00000101b
   RET
-  PZ:
+
+PZ:
   MOV   A, P1
   CPL   A
   MOV   P1, A
   RET
-  FIM:
+
+FIM:
   SJMP   FIM
 ```
 
+O programa realiza a leitura dos estados das chaves até que alguma delas seja ativada (seu bit se torna 0). Se a chave P2.0 for ativada, o programa faz um salto para PX, onde todos os LEDs da porta P1 recebem o bit 0, acendendo-os. Caso a chave P2.1 tenha sido ativada, os LEDs 0 e 2 da porta P1 se acendem. Já se chave P2.2 for ativada, o estado atual da porta P1 é movida para o acumulador. Os bits ali presentes são invertidos e esses bits são transmitidos de volta para a porta P1. Ou seja, os LEDs que estavam ativos foram desativados e vice versa.
 
+No entanto, ao rodar esse código, percebemos que ele apresenta um erro no simulador, chamado "Function Set not Called." 
+
+Há também a utilização incorreta da instrução RET. Isso ocorre devido à utilização de uma instrução RET para retornar de um salto, o que está incorreto. O uso de RET é para chamadas de subrotinas, que são realizadas com as funções ACALL e LCALL. Assim, quando o simulador tenta desempilhar um endereço, ele não o encontra e o programa passa a se comportar de forma inesperada.
