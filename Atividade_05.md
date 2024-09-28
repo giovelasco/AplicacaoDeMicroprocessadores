@@ -118,7 +118,7 @@ Esse delay irá decrementar o valor de R1 100 vezes e, a cada vez, decrementará
 Colocou-se 3 LEDs nos endereços P1.0, P1.1 e P1.2 no microcontrolador e 3 chaves nos endereços P2.0, P2.1 e P2.2. Considerando que os LEDs acendem quando são colocado nível baixo na saída e as chaves, quando pressionadas, colocam nível baixo na porta, explique o funcionamento do programa a seguir quando cada chave é pressionada.
 
 ```assembly
-  ORG 0000H
+ORG 0000H
 
 Leitura:
   JNB   P2.0, PX
