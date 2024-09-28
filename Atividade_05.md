@@ -92,6 +92,26 @@ END                                   ; Encerra o programa
 ### Questão 14
 Criar uma subrotina de delay de 50 milissegundos a partir da contagem de ciclos de instruções e intervalo de tempo. Essa estrutura poderá servir para piscar um LED a cada 50 ms (ver exemplo na aula correspondente).
 
+```assembly
+org 0000h                ; 
+
+main:
+    ACALL	delay            ; Chama a função que realiza o delay de 50 milissegundos
+
+delay:
+	MOV		R1, #100         ; M
+
+loop_delay:
+	MOV 	R0, #250         ; Move o valor 250 para R0 
+	DJNZ	R0, $            ; Decrementa R0 até que seja igual a zero (250 vezes)
+	DJNZ	R1, loop_delay   ; Decrementa R1 e retorna para o loop inicial (100 vezes)
+	
+	RET                      ; Retorna para a main
+```
+
+Esse delay irá decrementar o valor de R1 100 vezes e, a cada vez, decrementará o valor em R0 250 vezes. Assim, o intervalo em que o delay irá funcionar será de 250 * 100 = 2500 ciclos. Essas instruções levam 2$\micro$s para serem executadas. Assim, o tempo total de delay é de 50ms, como requisitado.
+
+
 <br>
 
 ### Questão 15
