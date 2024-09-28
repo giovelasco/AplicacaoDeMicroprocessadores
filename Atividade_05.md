@@ -109,7 +109,7 @@ loop_delay:
 	RET                      ; Retorna para a main
 ```
 
-Esse delay irá decrementar o valor de R1 100 vezes e, a cada vez, decrementará o valor em R0 250 vezes. Assim, o intervalo em que o delay irá funcionar será de 250 * 100 = 2500 ciclos. Essas instruções levam 2$\micro$s para serem executadas. Assim, o tempo total de delay é de 50ms, como requisitado.
+Esse delay irá decrementar o valor de R1 100 vezes e, a cada vez, decrementará o valor em R0 250 vezes. Assim, o intervalo em que o delay irá funcionar será de 250 * 100 = 2500 ciclos. Essas instruções levam 2µs para serem executadas. Assim, o tempo total de delay é de 50ms, como requisitado.
 
 
 <br>
