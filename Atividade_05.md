@@ -144,8 +144,4 @@ FIM:
   SJMP   FIM
 ```
 
-O programa realiza a leitura dos estados das chaves até que alguma delas seja ativada (seu bit se torna 0). Se a chave P2.0 for ativada, o programa faz um salto para PX, onde todos os LEDs da porta P1 recebem o bit 0, acendendo-os. Caso a chave P2.1 tenha sido ativada, os LEDs 0 e 2 da porta P1 se acendem. Já se chave P2.2 for ativada, o estado atual da porta P1 é movida para o acumulador. Os bits ali presentes são invertidos e esses bits são transmitidos de volta para a porta P1. Ou seja, os LEDs que estavam ativos foram desativados e vice versa.
-
-No entanto, ao rodar esse código, percebemos que ele apresenta um erro no simulador, chamado "Function Set not Called." 
-
-Há também a utilização incorreta da instrução RET. Isso ocorre devido à utilização de uma instrução RET para retornar de um salto, o que está incorreto. O uso de RET é para chamadas de subrotinas, que são realizadas com as funções ACALL e LCALL. Assim, quando o simulador tenta desempilhar um endereço, ele não o encontra e o programa passa a se comportar de forma inesperada.
+O programa realiza a leitura dos estados das chaves até que alguma delas seja ativada (seu bit se torna 0). Se a chave P2.0 for ativada, o programa faz um salto para PX, onde todos os LEDs da porta P1 recebem o bit 0, acendendo-os. Caso a chave P2.1 tenha sido ativada, os LEDs 0 e 2 da porta P1 se acendem. Já se chave P2.2 for ativada, o estado atual da porta P1 é movida para o acumulador. Os bits ali presentes são invertidos e esses bits são transmitidos de volta para a porta P1. Ou seja, os LEDs que estavam ativos foram desativados e vice versa. Note que, devido ao retorno constante para o bloco "Leitura", o programa nunca chega no bloco "FIM", ou seja, nunca é encerrado.
