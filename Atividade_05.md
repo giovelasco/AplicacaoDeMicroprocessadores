@@ -21,7 +21,7 @@
 
 (F) A área da RAM interna dedicada à pilha é determinada pelo ponteiro SP, um dos SFRs, que possui tamanho 8 bits, mesmo tamanho do barramento de endereço da CPU.
 
-(F) Geralmente são baseadas em flip-flops tipo D
+(V) Geralmente são baseadas em flip-flops tipo D
 
 <br>
 
