@@ -12,16 +12,27 @@ https://github.com/user-attachments/assets/0d3562db-9106-4e82-9a22-48d33cac5bd2
 Código em C do programa:
 ``` c
 void main() {
-    while(1) {
-        if(PORTB.RB0 ==0) {
-           PORTD.RD0 =~LATD.RD0; // Inverte o nível lógico do LED em LATD
-           // "~ "  inversão bit a bit  - SE incialmente RD0 = 0, receberá 1 quando
-           // a teclada for pressionada; SE 1, receberá o valor 0
-           Delay_ms(500);     // retarda a CPU de forma que ao pressionar a tecla..
-           // a ação de fato aconteça (as intruções são executadas em nanosegundos)
-        } 
-    }
-} 
+    // Diretivas de pré-configuração
+            ADCON1 |= 0x0F;
+    
+    // Configuração da entrada digital, usando um botão
+            TRISB.RB0 = 1;  // configura pino RB0 como entrada no PORTB
+            PORTB.RB0=1; //valor de leitura da entrada em pull-up
+        
+    // Config. Saída Digital (usando um LED do kit): configuração do estado inicial
+            TRISD.RD0 = 0; // output - configura o pino como saída (=0)
+            PORTD.RD0 = 0; // saída inicialmente desligada   (LED apagado)
+    
+    // Condições e loop para piscar o LED:
+        while(1) // True
+        {
+            if(PORTB.RB0 ==0) {  // Tecla ativada em nível lógico 0
+               PORTD.RD0 =~LATD.RD0; // Inverte o nível lógico do LED 
+               Delay_ms(500);     // retarda a CPU de forma que ao pressionar a tecla, a ação de fato aconteça
+             }
+        
+        } // fim do while
+} // fim da main
 ```
 
 <br>
@@ -33,16 +44,31 @@ https://github.com/user-attachments/assets/e546e13b-3df2-4f0c-ae4f-1744fc738bd4
 Código em C do programa:
 ``` c
 void main() {
-    while(1) {
-        if(PORTB.RB0 ==0) {
-           PORTD.RD0 =~LATD.RD0; // Inverte o nível lógico do LED em LATD
-           // "~ "  inversão bit a bit  - SE incialmente RD0 = 0, receberá 1 quando
-           // a teclada for pressionada; SE 1, receberá o valor 0
-           Delay_ms(500);     // retarda a CPU de forma que ao pressionar a tecla..
-           // a ação de fato aconteça (as intruções são executadas em nanosegundos)
-        } 
-    }
-} 
+    // Diretivas de pré-configuração
+        ADCON1 |= 0x0F;
+
+    // Configuração da entrada digital, usando um botão/swtich do kit como exemplo
+        TRISB.RB0 = 1;  // configura pino RB0 como entrada no PORTB
+        PORTB.RB0=1; //valor de leitura da entrada em pull-up, ao colocar TRISX.RX0 =1,...
+    // MCU já coloca nível 1 nesta porta X
+
+    // COnfig. Saída Digital (usando um LED do kit): configuração do estado inicial
+        TRISD.RD0=0; // output - configura o pino como saída (=0) (consome corrente)
+        PORTD.RD0 = 0; // saída inicialmente desligada   (LED apagado)
+
+    // Condições e loop para piscar o LED:
+    while(1) // True
+    {
+        if(PORTB.RB0 ==0) { // Tecla ativada em nível lógico 0 
+           PORTD.RD0 =~LATD.RD0; // Inverte o nível lógico do LED
+           Delay_ms(500);     // retarda a CPU de forma que ao pressionar a tecla para que a ação de fato aconteça (as intruções são executadas em nanosegundos)
+         }
+    
+         if(PORTB.RB0 =!0) {
+             PORTD.RD0 = 0;
+         }
+    } // fim do while
+} // fim da main
 
 ```
 
@@ -52,60 +78,38 @@ void main() {
 
 https://github.com/user-attachments/assets/e94bf9f0-fb16-480f-8bdb-5278bdf4c4a4
 
-
+Código em C do programa:
 ```c
 void main() {
-    unsigned char FlagAux = 0; // variável aux. do tipo char que irá permitir
-    // encontrar o estado anterior do botão, para acionar ou não o LED (selo).
-    // Essa variável é importante para fazer com que o LED seja acionado somente
-    //quando ocorra uma mudança real, evitando acionar mais de uma vez se o estado
-    //ainda estiver no mesmo nível que provocou o acionamento.
+    // Variáveis globais
+        unsigned char FlagAux = 0; // variável para tratar do efeito bouncing
 
-    ADCON1 |= 0XF;  // registrador presente no modelo PIC18F4550 e derivados
-    // outros modelos, como PIC18F45k22, usam registradores ANSEL
-
-// Programa
+    // Diretivas de pré-configuração
+        ADCON1 |= 0XF; // configurações da placa utilizada
 
     // Tecla  - configuração da entrada
-    trisb.rb0 = 1;  // configura pino RB0 como entrada
-    PORTB.RB0=1; // coloca em nível 1 (pull-up)
+        trisb.rb0 = 1;  // configura pino RB0 como entrada
+        PORTB.RB0 = 1; // coloca em nível 1 (pull-up)
 
     // LED  - saída: configuração do estado inicial
-    TRISD.RD0=0; //  configura o pino como saída (=0) (consome corrente)
-    PORTD.RD0 = 0; // saída incialmente em 0 (LED OFF)
+        TRISD.RD0 = 0; //  configura o pino como saída (=0) (consome corrente)
+        PORTD.RD0 = 0; // saída incialmente em 0 (LED OFF)
+
+    // Condições e loop para piscar o LED:
+    while(1) {
+        if(PORTB.RB0 ==0 && FlagAux==0){    // Se o botão é pressionado e a flag é 0
+            PORTD.RD0 =!LATD.RD0;    // Inverte o nível lógico do LED 
+            FlagAux = 1;    // A condição para entrar no if não é mais verdadeira e o programa não será invertido imediatamente novamente
+            Delay_ms(40);    // trata efeito bouncing (repique mecânico do botão, dentro deste intervalo de tempo não será considerado)
+        }
     
-    // TRISD = 0; // todos os pinos como saída
-    // PORTD =0; //todos os pinos = 0
-
-    // condições e loop para piscar o LED:
-while(1) {
-    if(PORTB.RB0 ==0 && FlagAux==0){    // AND lógico (expressão)
-    // Se tecla é pressionada: true; E Flag = 0 (lembrando que valor inicial já é 0)
-    // Tecla = true. Resultado: condição verdadeira e o bloco segue sendo executado
-
-        PORTD.RD0 =!LATD.RD0;  // (TOGGLE) Inverte o nível lógico do LED em LATD
-        // "!" inversão bit a bit - SE inicialmente RD0 = 0, receberá 1 quando
-        // a tecla for pressionada; SE 1, receberá o valor 0
-
-        FlagAux=1;            // A condição acima não será mais verdadeira - (aqui
-        // eternamente o botão ainda estará pressionado - pois a execução é muito rápida)
-
-        Delay_ms(40);         // trata efeito bouncing (repique mecânico do botão,
-        //dentro deste intervalo de tempo não será considerado)
-    }
-
-    //fim do bloco IF, o qual em caso de falso (a tecla não for pressionada
-    //ou continua pressionada (devido à velocidade do MCU - nanossegundos) mas a
-    //Flag = 1), será pulado.
-
-    // Condição oposta para repetir o loop = tecla é liberada
-    if(PORTB.RB0 ==1 && FlagAux==1) // Se a tecla não estiver press. E flag = 1
-    {
-        FlagAux=0;       // condição para voltar ao bloco IF anterior
-        Delay_ms(40);    // trata efeito bouncing
-    }
-} //while
-} // main
+        // Condição oposta para repetir o loop = tecla é liberada
+        if(PORTB.RB0 ==1 && FlagAux==1) { // Se o botão não estiver pressionado e e flag de suporte for igual a 1
+            FlagAux = 0;       // condição para ingressar novamente no if inicial
+            Delay_ms(40);    // trata bouncing
+        }
+    } // fim do while
+} // fim da main
 ```
 
 <br>
@@ -114,25 +118,65 @@ while(1) {
 
 https://github.com/user-attachments/assets/eeb78b98-a7de-4ed4-9626-a28fcc942e94
 
+Código em C do programa:
 ``` c
-void main() {
+// Variáveis globais
+    signed char ucContador = -1; // para incrementar o contador
 
+// Função para realizar o incremento do display de 7 segmentos
+    void Incremento(unsigned char Contador) { 
+        switch (Contador) {      // Acionamento do display de 7 segmentos
+            case 0:{ latd = 0b00111111; break;}   //  0 no display
+            case 1:{ latd = 0b00000110; break;}   //  1 no display
+            case 2:{ latd = 0b01011011; break;}   // 2 no display
+    
+            default: {PORTD = 0; ucContador = -1; break;} // zera todo o PORTD e reinicia o contador
+        }
+    }
+
+// Início da função principal
+void main() {
+    unsigned char FlagAux = 0;
+
+// Diretivas de pré-configuração
+    ADCON1 |= 0XF;   // configuração dos pinos como digital
+
+// Configurar os pinos de acionamentos do display:
+   TRISA = 0;      // define o PORTA
+   PORTA = 0b00001111; //RA0, RA1, RA2, RA3  - liga o display de 7 seg. do kit
+   
+// Configurações de entrada
+    TRISB.RB0 = 1;  // configura pino RB0 como entrada
+    PORTB.RB0 = 1; 
+
+// Condições e loop para piscar o LED:
+    while(1) {
+        if(PORTB.RB0 ==0 && FlagAux==0) { // Se 
+           Incremento(++ucContador);  
+           FlagAux = 1;        //  A condição acima não será mais verdadeira
+           Delay_ms(40);     // tratar bounce
+         }
+    
+         if(PORTB.RB0 ==1 && FlagAux==1) {
+              FlagAux = 0;     // condição para voltar ao bloco IF anterior
+              Delay_ms(40);    // tratar bounce
+         }
+    
+    } // fim do while
+} // fim da main
 ```
 <br>
 
 • *Levando em consideração os pontos importantes sobre a família de microcontroladores PIC, compare o PIC18F4550 com um microcontrolador da família MSC-51 (por exemplo: AT89S51) estudado anteriormente (focar nas características chaves e mais representativas entre eles: arquitetura, conjunto de instruções, pinagem, periféricos e funcionalidades disponíveis e diferenças quantitativas nas especificações).*
 
-Arquitetura:
+Primeiramente, é importante notar que ambos os microcontroladores são de fabricantes distintas: enquanto o PIC é fabricado pela Microchip, a família MSC-51 é da Atmel. Em relação à arquitetura, o PIC18F4550 possui uma arquitetura Harvard, em que as memórias de programa e dados são separadas, permitindo que a CPU acesse simultaneamente a instrução e os dados. Isso permite o uso da técnica de pipeline, o que possibilita a execução de instruções em menos ciclos. Já o AT89S51 possui uma arquitetura Von Neumann, onde os programas e os dados compartilham o mesmo espaço de memória, o que torna o sistema um pouco mais simples, porém menos eficiente. O PIC18F4550 utiliza um conjunto de instruções RISC, ou seja, há menos intruções, mas elas são otimizadas para serem executadas em menos ciclos de clock. Já o AT89S51 utiliza um conjunto de instruções CISC, ou seja, tem mais instruções que podem levar mais ciclos para serem executadas.
 
-Conjunto de Instruções
+Em relação às especificações de I/O e periféricos de cada microcontrolador, o PIC18F4550 possui 40 pinos com até 35 linhas de I/O digitais, um Conversor Analógico-Digital de 10 bits com até 13 canais, entradas de comunicação USB (USB 2.0) nativa, canais PWM, 4 timers, suporte para USART, SPI, e I2C para comunicação serial. O AT89S51 também possui 40 pinos com até 35 linhas de I/O digitais, mas ele não possui um Conversor Analógico-Digital, entradas USB ou PSW como o PIC. Ele possui 2 timers, suporte para UART, mas não possui suporte nativo para I2C ou SPI.
 
-Pinagem:
+Para a memória de programa, o PIC18F4550 possui até 32 KB de Flash para armazenar o código do programa. Isso oferece muito espaço para programas complexos. Já o AT89S51 possui apenas 4 KB de Flash, o que limita o tamanho dos programas. Já para a memória RAM, o PIC18F4550 dispõe de 2 KB de RAM interna e o AT89S51 possui 128 bytes de RAM interna, o que é significativamente menor em comparação ao PIC. Além disso, o PIC18F4550 possui 256 bytes de EEPROM interna, que permite armazenamento de dados permanentes, enquanto o AT89S51 não possui EEPROM interna.
 
-Periféricos:
-
-Funcionalidades Disponíveis:
-
-Diferenças Quantitativas:
+Por conta dessas especificações, o PIC é mais utilizado para projetos mais complexos, que envolvam uma interface USB ou controle de dispositivos analógicos. Já o 
+AT89S51 é utilziado em projetos mais simples que não exigem recursos mais avançados ou grande exigência de memória.
 
 <br>
 
