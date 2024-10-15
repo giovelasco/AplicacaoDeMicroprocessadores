@@ -7,7 +7,11 @@
 
 • *Ilustrar no SimulIDE a conexão de um botão no pino B0 do microcontrolador PIC18F4550 na configuração Pull-Up (externo), o qual ao ser pressionado deverá mudar o estado de um LED conectado ao pino D0, com base no exemplo da Atividade 1. Simule o circuito carregando o arquivo hex gerado na compilação do programa em Linguagem C que atende essa lógica, realizada no software no software MikroC PRO for PIC. Configurar o valor do resistor Pull-Up para 10 kΩ e a frequência do clock do microcontrolador para 8 MHz.*
 
+Trocar
+
 https://github.com/user-attachments/assets/0d3562db-9106-4e82-9a22-48d33cac5bd2
+
+Trocar
 
 Código em C do programa:
 ``` c
