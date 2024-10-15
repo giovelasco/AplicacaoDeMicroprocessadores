@@ -28,7 +28,7 @@ void main() {
         {
             if(PORTB.RB0 ==0) {  // Tecla ativada em nível lógico 0
                PORTD.RD0 =~LATD.RD0; // Inverte o nível lógico do LED 
-               Delay_ms(500);     // retarda a CPU de forma que ao pressionar a tecla, a ação de fato aconteça
+               Delay_ms(400);     // retarda a CPU de forma que ao pressionar a tecla, a ação de fato aconteça
              }
         
         } // fim do while
