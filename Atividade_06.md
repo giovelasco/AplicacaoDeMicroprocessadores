@@ -7,11 +7,7 @@
 
 • *Ilustrar no SimulIDE a conexão de um botão no pino B0 do microcontrolador PIC18F4550 na configuração Pull-Up (externo), o qual ao ser pressionado deverá mudar o estado de um LED conectado ao pino D0, com base no exemplo da Atividade 1. Simule o circuito carregando o arquivo hex gerado na compilação do programa em Linguagem C que atende essa lógica, realizada no software no software MikroC PRO for PIC. Configurar o valor do resistor Pull-Up para 10 kΩ e a frequência do clock do microcontrolador para 8 MHz.*
 
-Trocar
-
-https://github.com/user-attachments/assets/0d3562db-9106-4e82-9a22-48d33cac5bd2
-
-Trocar
+https://github.com/user-attachments/assets/f87442f5-0b0b-4ef1-b722-aafcdc81e79e
 
 Código em C do programa:
 ``` c
@@ -30,8 +26,8 @@ void main() {
     // Condições e loop para piscar o LED:
         while(1) // True
         {
-            if(PORTB.RB0 ==0) {  // Tecla ativada em nível lógico 0
-               PORTD.RD0 =~LATD.RD0; // Inverte o nível lógico do LED 
+            if(PORTB.RB0 ==0) {  // Se o botão estiver pressionado
+               PORTD.RD0 =~ LATD.RD0; // Inverte o nível lógico do LED 
                Delay_ms(300);     // retarda a CPU de forma que ao pressionar a tecla, a ação de fato aconteça
              }
         
@@ -63,13 +59,13 @@ void main() {
     // Condições e loop para piscar o LED:
     while(1) // True
     {
-        if(PORTB.RB0 ==0) { // Tecla ativada em nível lógico 0 
+        if(PORTB.RB0 ==0) { // Se o botão for pressionado
            PORTD.RD0 =~LATD.RD0; // Inverte o nível lógico do LED
-           Delay_ms(500);     // retarda a CPU de forma que ao pressionar a tecla para que a ação de fato aconteça (as intruções são executadas em nanosegundos)
+           Delay_ms(500);     // Delay de 500 ms ao inverter o nível lógico
          }
     
-         if(PORTB.RB0 =!0) {
-             PORTD.RD0 = 0;
+         if(PORTB.RB0 =!0) { // Se o botão não estiver pressionado
+             PORTD.RD0 = 0; // O LED permacesse apagado
          }
     } // fim do while
 } // fim da main
