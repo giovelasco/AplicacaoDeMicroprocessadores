@@ -6,7 +6,7 @@
 
 • *Implemente no SimulIDE, com base no Exemplo 5, um programa para piscar um LED (conectado à um dos pinos do PORTC) a cada 1 segundo, utilizando o temporizador Timer0 (TMR0) do PIC18F4550. Ajustar o clock do microcontrolador PIC18F4550 para 8 MHz no SimulIDE, carregar o firmware (arquivo hex resultante da compilação no software MikroC PRO for PIC) e realizar a simulação. Apresentar na resposta o programa em linguagem C comentado (somente as partes mais importantes) e print do circuito montado e simulação realizada no SimulIDE. Este programa não faz o uso de interrupções.*
 
-![image](https://github.com/user-attachments/assets/9dc77578-4e13-43cc-abb7-a4fc6bac4c9d)
+![image](https://github.com/user-attachments/assets/b937c66b-e2a5-47fe-a06e-cc7ce78a95ad)
 
 Código em linguagem C:
 ``` C
