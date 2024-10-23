@@ -6,32 +6,32 @@
 
 • *Implemente no SimulIDE, com base no Exemplo 5, um programa para piscar um LED (conectado à um dos pinos do PORTC) a cada 1 segundo, utilizando o temporizador Timer0 (TMR0) do PIC18F4550. Ajustar o clock do microcontrolador PIC18F4550 para 8 MHz no SimulIDE, carregar o firmware (arquivo hex resultante da compilação no software MikroC PRO for PIC) e realizar a simulação. Apresentar na resposta o programa em linguagem C comentado (somente as partes mais importantes) e print do circuito montado e simulação realizada no SimulIDE. Este programa não faz o uso de interrupções.*
 
-![image](https://github.com/user-attachments/assets/b937c66b-e2a5-47fe-a06e-cc7ce78a95ad)
 
-Cálculo do tempo de overflow:
 
-  ciclo de maq. * prescaler * (modo_8_16_bits - valor inicial)
+https://github.com/user-attachments/assets/1ba1b555-be14-47d5-80ca-1e088c960f36
+
+
+#### Cálculo do tempo de overflow:
+
+  tempo = ciclo de máquina * prescalar * (modo_8_16_bits - valor inicial)
+
+Para o tempo de 1 segundo no modo 16 bits (2^16 = 65536), com prescaler de 32, temos:
   
-1000.000us = 0.5 us * 32 *  (65536-x)
+  1000.000us = 0.5 us * 32 *  (65536 - x)
 
-1000.000/(0.5 * 32) = 65536 - x
+  x = 65536 - 62500 = 3036 (valor inicial carregado nos registradores do timer0)
 
-x = 65536 - 62500 = 3036 (valor inicial carregado nos registradores do timer0)
+Note que 3036 = 0BDCh (em hexadecimal). Portanto, TMR0L = 0xDC e TMR0H = 0x0B no código.
 
-3036 = 0BDCh (em hexadecimal). Portanto, TMR0L = 0xDC e TMR0H = 0x0B no código.
-
-Código em linguagem C:
+#### Código em linguagem C:
 ``` C
-void ConfigMCU() { // função que configura o microprocessador
-  // Configurando os pinos como digitais
+void ConfigMCU() { 
   ADCON1 |= 0x0F;
-
- // Configuração das portas
    TRISC = 0;    // PORTC como saída para o LED
    PORTC = 0;    // LED inicialmente desligado
 }
 
-void ConfigTIMER() {    // função que configura o TIMER
+void ConfigTIMER() {   
   T0CON = 0B00000100;  // inicialmente desligado, opera como timer, uso do clock, setado para prescale igual a 32
 
 // valores iniciais carregados no timer para contagem até 1s na razão 32 e modo 16 bits
@@ -45,7 +45,6 @@ void ConfigTIMER() {    // função que configura o TIMER
 
 void main() {
 
-// chamada das funções criadas
 ConfigMCU();
 ConfigTIMER();
 
@@ -63,7 +62,6 @@ while(1) {
 
 }  // fim da main
 ```
-
 
 <br>
 
