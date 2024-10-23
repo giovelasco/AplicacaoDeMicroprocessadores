@@ -8,83 +8,60 @@
 
 ![image](https://github.com/user-attachments/assets/b937c66b-e2a5-47fe-a06e-cc7ce78a95ad)
 
+Cálculo do tempo de overflow:
+
+  ciclo de maq. * prescaler * (modo_8_16_bits - valor inicial)
+  
+1000.000us = 0.5 us * 32 *  (65536-x)
+
+1000.000/(0.5 * 32) = 65536 - x
+
+x = 65536 - 62500 = 3036 (valor inicial carregado nos registradores do timer0)
+
+3036 = 0BDCh (em hexadecimal). Portanto, TMR0L = 0xDC e TMR0H = 0x0B no código.
+
 Código em linguagem C:
 ``` C
-/*
-- calc. do tempo de overflow do TMR0:
-         ciclo de maq. * prescaler * (modo_8_16_bits - valor inicial)
-     
-      Calc. para 1 segundo no modo 16 bits (2^16 = 65536), com prescaler de 32:
-     
-              1000.000us = 0.5 us * 32 *  (65536-x)
-
-            1000.000/(0.5 * 32) = 65536 - x
-
-            x = 65536 - 62500
-            x = 3036 (valor inicial carregado nos registradores do timer0)
-
-      3036 = 0BDCh (em hexadecimal) = HByte: 0B; LByte: DC
-
-      TMR0L = 0xDC;
-      TMR0H = 0x0B;
-*/
-
-
-void ConfigMCU()   // função de config. do microcontrolador
-{
+void ConfigMCU() { // função que configura o microprocessador
   // Configurando os pinos como digitais
   ADCON1 |= 0x0F;
-  
- // Config. das portas
-   TRISC = 0;    // PORTD como saída  (usar LED)
-   PORTC = 0;    // LED inicialmente OFF
 
+ // Configuração das portas
+   TRISC = 0;    // PORTC como saída para o LED
+   PORTC = 0;    // LED inicialmente desligado
 }
 
-void ConfigTIMER()    // função p/ config. o timer
-{
- // Programaçao do TMR0
+void ConfigTIMER() {    // função que configura o TIMER
+  T0CON = 0B00000100;  // inicialmente desligado, opera como timer, uso do clock, setado para prescale igual a 32
 
-  T0CON = 0B00000110;  // inicialmente desligado, opera como timer, uso do clock
-//  não usa borda, uso do prescaler (ativo em 0), e razão do prescaler: 110 (128)
- // ver configuração dos bits do registrador no datasheet
- 
 // valores iniciais carregados no timer para contagem até 1s na razão 32 e modo 16 bits
       TMR0L = 0xDC;
       TMR0H = 0x0B;
-   
-   INTCON.TMR0IF = 0 ; //Flag de overflow inicialmente zerada
-   // vai para 1 automaticamente quando ocorre o overflow
 
-   T0CON.TMR0ON = 1; //Liga do timer no registrador T0CON
-   // seria o mesmo que T0CON = 0B10000110  (MSB = 1)
-   // TMR0ON é nome do bit7, i.e.m TIMR0ON_bit =1; ou T0CON.f7
+   INTCON.TMR0IF = 0 ; // flag de overflow inicialmente zerada que vai para 1 quando ocorre o overflow
+
+   T0CON.TMR0ON = 1; // liga do timer no registrador T0CON
 }
 
 void main() {
 
-// chamada das fuções definidas anteriormente
+// chamada das funções criadas
 ConfigMCU();
 ConfigTIMER();
 
-while(1)
-{
-        if (INTCON.TMR0IF == 1)  // verifica Se houve o "overflow" da contagem
-        {  // se sim:
+while(1) {
+        if (INTCON.TMR0IF == 1) {  // se houve o overflow da contagem
            PORTC.RC2 = ~LATC.RC2;// inverte nível lógico do LED
 
-           // Recarrega o timer  para o ciclo se repetir (LED piscar a cada 1s)
-           // o Timer0 deve ser recarregado manualmente p/ reiniciar a contagem
+           // recarrega o timer com 0BDCh para o ciclo se repetir
                 TMR0L = 0xDC;
                 TMR0H = 0x0B;
-            INTCON.TMR0IF = 0; // zera o flag de overflow da contagem  
-            //(sempre é necessário zerar manualmente p/ reiniciar a contagem)
 
-        } // if
+            INTCON.TMR0IF = 0; // zera a flag de overflow da contagem
+        }
+} // fim do while
 
-} // while
-
-}  // main
+}  // fim da main
 ```
 
 
