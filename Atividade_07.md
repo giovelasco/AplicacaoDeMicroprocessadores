@@ -6,10 +6,7 @@
 
 • *Implemente no SimulIDE, com base no Exemplo 5, um programa para piscar um LED (conectado à um dos pinos do PORTC) a cada 1 segundo, utilizando o temporizador Timer0 (TMR0) do PIC18F4550. Ajustar o clock do microcontrolador PIC18F4550 para 8 MHz no SimulIDE, carregar o firmware (arquivo hex resultante da compilação no software MikroC PRO for PIC) e realizar a simulação. Apresentar na resposta o programa em linguagem C comentado (somente as partes mais importantes) e print do circuito montado e simulação realizada no SimulIDE. Este programa não faz o uso de interrupções.*
 
-
-
 https://github.com/user-attachments/assets/1ba1b555-be14-47d5-80ca-1e088c960f36
-
 
 #### Cálculo do tempo de overflow:
 
@@ -25,53 +22,89 @@ Note que 3036 = 0BDCh (em hexadecimal). Portanto, TMR0L = 0xDC e TMR0H = 0x0B no
 
 #### Código em linguagem C:
 ``` C
-void ConfigMCU() { 
-  ADCON1 |= 0x0F;
-   TRISC = 0;    // PORTC como saída para o LED
-   PORTC = 0;    // LED inicialmente desligado
+void ConfigMCU() {
+     ADCON1 |= 0x0F;
+     TRISC = 0;    // PORTC como saída para o LED
+     PORTC = 0;    // LED inicialmente desligado
 }
 
-void ConfigTIMER() {   
-  T0CON = 0B00000100;  // inicialmente desligado, opera como timer, uso do clock, setado para prescale igual a 32
+void ConfigTIMER() { 
+     T0CON = 0B00000100;  // inicialmente desligado, opera como timer, uso do clock, setado para prescale igual a 32
 
-// valores iniciais carregados no timer para contagem até 1s na razão 32 e modo 16 bits
-      TMR0L = 0xDC;
-      TMR0H = 0x0B;
+     //valores iniciais carregados no timer para contagem até 1s na razão 32 e modo 16 bits
+     TMR0L = 0xDC;
+     TMR0H = 0x0B;
 
-   INTCON.TMR0IF = 0 ; // flag de overflow inicialmente zerada que vai para 1 quando ocorre o overflow
+     INTCON.TMR0IF = 0 ; // flag de overflow inicialmente zerada que vai para 1 quando ocorre o overflow
 
-   T0CON.TMR0ON = 1; // liga do timer no registrador T0CON
+     T0CON.TMR0ON = 1; // liga do timer no registrador T0CON
 }
 
 void main() {
+     ConfigMCU();
+     ConfigTIMER();
 
-ConfigMCU();
-ConfigTIMER();
-
-while(1) {
+     while(1) {
         if (INTCON.TMR0IF == 1) {  // se houve o overflow da contagem
            PORTC.RC2 = ~LATC.RC2;// inverte nível lógico do LED
-
+           
            // recarrega o timer com 0BDCh para o ciclo se repetir
-                TMR0L = 0xDC;
-                TMR0H = 0x0B;
-
-            INTCON.TMR0IF = 0; // zera a flag de overflow da contagem
+           TMR0L = 0xDC;
+           TMR0H = 0x0B;
+             
+           INTCON.TMR0IF = 0; // zera a flag de overflow da contagem
         }
-} // fim do while
-
-}  // fim da main
+     }
+}
 ```
 
 <br>
 
 • *Implemente no SimulIDE, com base no material de aula (slides) do Cap. 7, um programa para acionar uma a saída (representada por um LED que irá piscar) a cada intervalo de tempo correspondente a contagem de tempo máxima do Timer3 (TMR3) do PIC18F4550 (ajustando todos os parâmetros com valores máximos para contagem, preescaler etc., e carregando valor inicial zero nos registradores acumuladores do TMR3). Ajustar o clock do microcontrolador PIC18F4550 para 8 MHz no SimulIDE, carregar o firmware (arquivo hex resultante da compilação no software MikroC PRO for PIC) e realizar a simulação. Apresentar na resposta o programa em linguagem C comentado e print do circuito montado e simulação realizada no SimulIDE. Este programa não faz o uso de interrupções.*
 
+https://github.com/user-attachments/assets/0cf8e485-4a53-4e68-8b07-ba9ba974d50b
+
+#### Código em linguagem C:
+``` C
+void ConfigMCU() {
+     ADCON1 |= 0x0F;
+     TRISC = 0;    // PORTC como saída para o LED
+     PORTC = 0;    // LED inicialmente desligado
+}
+
+void ConfigTIMER() {
+     T3CON = 0B10110000;// inicialmente desligado, clock externo, sem oscilador dedicado, prescaler 1:8, Fosc/4, 16 bits
+
+     //valores iniciais carregados no timer para contagem
+     TMR3L = 0;
+     TMR3H = 0;
+
+     PIR2.TMR3IF = 0 ; // flag de overflow inicialmente zerada que vai para 1 quando ocorre o overflow
+
+     T3CON.TMR3ON = 1; // liga o timer3
+}
+
+void main() {
+     ConfigMCU();
+     ConfigTIMER();
+
+     while(1) {
+        if (PIR2.TMR3IF == 1) {  // se houve o overflow da contagem
+           PORTC.RC2 = ~LATC.RC2;// inverte nível lógico do LED
+
+           // recarrega o timer para o ciclo se repetir
+           TMR3L = 0;
+           TMR3H = 0;
+
+           PIR2.TMR3IF = 0; // zera a flag de overflow da contagem
+        }
+     }
+}
+```
 
 <br>
 
-• *Implemente no SimulIDE, com base no material de aula (slides) do Cap. 7, um programa para acionar uma a saída (representada por um LED que irá piscar) a cada intervalo de tempo correspondente a contagem de tempo máxima do Timer2 (TMR2) do PIC18F4550 (ajustando todos os parâmetros com valores máximos para contagem, preescaler, postscaler etc., e definindo valor máximo no registrador PR2 * observar a diferença do
-Timer2 para os demais temporizadores). Ajustar o clock do microcontrolador PIC18F4550 para 8 MHz no SimulIDE, carregar o firmware (arquivo hex resultante da compilação no software MikroC PRO for PIC) e realizar a simulação. Apresentar na resposta o programa em linguagem C comentado e print do circuito montado e simulação realizada no SimulIDE. Este programa não faz o uso de interrupções.*
+• *Implemente no SimulIDE, com base no material de aula (slides) do Cap. 7, um programa para acionar uma a saída (representada por um LED que irá piscar) a cada intervalo de tempo correspondente a contagem de tempo máxima do Timer2 (TMR2) do PIC18F4550 (ajustando todos os parâmetros com valores máximos para contagem, preescaler, postscaler etc., e definindo valor máximo no registrador PR2 * observar a diferença do Timer2 para os demais temporizadores). Ajustar o clock do microcontrolador PIC18F4550 para 8 MHz no SimulIDE, carregar o firmware (arquivo hex resultante da compilação no software MikroC PRO for PIC) e realizar a simulação. Apresentar na resposta o programa em linguagem C comentado e print do circuito montado e simulação realizada no SimulIDE. Este programa não faz o uso de interrupções.*
 
 
 <br>
