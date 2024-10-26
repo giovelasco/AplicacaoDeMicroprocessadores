@@ -106,6 +106,41 @@ void main() {
 
 • *Implemente no SimulIDE, com base no material de aula (slides) do Cap. 7, um programa para acionar uma a saída (representada por um LED que irá piscar) a cada intervalo de tempo correspondente a contagem de tempo máxima do Timer2 (TMR2) do PIC18F4550 (ajustando todos os parâmetros com valores máximos para contagem, preescaler, postscaler etc., e definindo valor máximo no registrador PR2 * observar a diferença do Timer2 para os demais temporizadores). Ajustar o clock do microcontrolador PIC18F4550 para 8 MHz no SimulIDE, carregar o firmware (arquivo hex resultante da compilação no software MikroC PRO for PIC) e realizar a simulação. Apresentar na resposta o programa em linguagem C comentado e print do circuito montado e simulação realizada no SimulIDE. Este programa não faz o uso de interrupções.*
 
+https://github.com/user-attachments/assets/f08590e3-08a5-40d9-909d-3ceb660d62f9
+
+#### Código em linguagem C:
+``` C
+void ConfigMCU() {
+     ADCON1 |= 0x0F;
+     TRISC = 0;    // PORTC como saída para o LED
+     PORTC = 0;    // LED inicialmente desligado
+}
+
+void ConfigTIMER() {
+     T2CON = 0B01111111; // inicialmente desligado, prescaler 1:16, postscale 1:16
+     
+     PR2 = 255; // valor máximo em termos de possibilidades 2^8
+
+     PIR1.TMR2IF = 0 ; // flag de overflow inicialmente zerada que vai para 1 quando ocorre o overflow
+
+     T2CON.TMR2ON = 1; // liga o timer3
+}
+
+void main() {
+     ConfigMCU();
+     ConfigTIMER();
+
+     while(1) {
+        if (PIR1.TMR2IF == 1) {  // se houve o overflow da contagem
+           PORTC.RC2 = ~LATC.RC2;// inverte nível lógico do LED
+
+           // não é preciso recarrega o timer2
+           
+           PIR1.TMR2IF = 0; // zera a flag de overflow da contagem
+        }
+     }
+}
+```
 
 <br>
 
