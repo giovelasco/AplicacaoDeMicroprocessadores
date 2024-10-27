@@ -150,9 +150,49 @@ void main() {
 
 • *Implemente no SimulIDE, com base no Exemplo 8, um programa para mudar o estado de uma saída (representada por um LED conectado à um dos pinos do PORTD) sempre que for sinalizado um evento (representado por um botão quando é pressionado, o qual também ilustra a leitura de um sensor conectado a uma entrada do microcontrolador). Neste caso, a implementação será realizada com uso de interrupções externas. Basicamente, o programa é um aprimoramento do Exemplo 1 (leitura de entrada e acionamento de saída – I/O digital), no qual um botão, ao ser pressionado, muda o estado de um LED. No entanto, ao invés de gastar linhas de código no programa principal para verificar se o botão foi pressionado, utiliza-se interrupções (evento por hardware que faz com que o programa salte automaticamente para a sub-rotina de tratamento somente quando o botão for pressionado). Deve-se utilizar a interrupção externa INT2. Portanto, o botão deve ser conectado na configuração pull-up ao pino do PIC18F4550 correspondente à INT2 (observar qual deve ser este pino por meio da pinagem do microcontrolador disponível no datasheet e no material de aula). Deve-se configurar o uso de interrupções por meio da ativação das chaves globais e específicas da INT2 (flags IE, IF, IP) nos registradores relacionados a esta interrupção (ver datasheet – seção Interrupts). Na sub-rotina de tratamento da interrupção (para onde o programa saltará quando o botão for pressionado), o LED deverá mudar seu nível lógico (inversão) e a INT2IF deve ser zerada (no PIC, este processo é feito manualmente). Ajustar o clock do microcontrolador PIC18F4550 para 8 MHz no SimulIDE, carregar o firmware (arquivo hex resultante da compilação no software MikroC PRO for PIC) e realizar a simulação. Apresentar na resposta o programa em linguagem C comentado e print do circuito montado e simulação realizada no SimulIDE.*
 
+https://github.com/user-attachments/assets/605b6c6e-390c-46cf-9238-907dd91dc045
 
+#### Código em linguagem C:
+``` C
+void INTERRUPCAO_HIGH() iv 0x0008 ics ICS_AUTO {
+  if(INTCON3.INT2IF == 1){ // verifica se a INT2 ocorreu
+     PORTD.RD0 = ~LATD.RD0; // inverte o estado lógico do LED
+
+     INTCON3.INT2IF = 0;     //  zera flag IF do INT2
+   }
+}
+
+void ConfigMCU() {
+ ADCON1 |= 0X0F; // configira pinos do microcontrolador como digitais
+
+ INTCON2.RBPU = 0; // liga os resistores de pull-up do PORTB
+
+ TRISD = 0;  // definir o pino como saída (LED)
+ PORTD = 0;  // LEDs inicialmente apagados
+}
+
+void main() {
+  ConfigMCU();
+
+  // Configuração global das interrupções GIE 
+  INTCON.GIEH = 1; // alta prioridade
+  RCON.IPEN = 1;  // habilita níveis de prioridade
+
+  //Configuração da interrupção individual do INT2
+  INTCON3.INT2IE = 1; // ativa INT2
+  INTCON3.INT2IP = 1; // alta prioridade de interrupção 
+  INTCON3.INT2IF = 0; // flag responsável por acionar a interrupção inicialmente desativada
+
+  INTCON2.INTEDG2 = 1; // borda
+                       // 1 - > Borda de subida (ao soltar a tecla)
+                       // 0 - > Borda de descida (ao pressionar a tecla)
+
+  TRISB.RB2 = 1;        // pino RB2/INT2 como entrada
+
+  while(1);   //segura o processamento (pooling)
+}
+```
 <br>
-
 
 • *Implemente no SimulIDE, com base no Exemplo 7 disponibilizado no e-Disciplinas, um programa para acender um LED (conectado à um dos pinos do PORTD) após 5 eventos (representados por um botão na configuração pull-up pressionado por 5 vezes) utilizando o Timer1(TMR1) no modo contador (modo 16 bits). Para tanto, o botão deve ser conectado ao pino T13CKI do PIC18F4550 (ver qual é por meio da pinagem disponível no datasheet e no material de aula). Configurar o uso de interrupção (interrupção interna) do TMR1 (habilitar a chave de interrupções de periféricos e ativar flag IE e zerar IF referente ao TMR1). Neste contexto, a interrupção do TMR1 é um tipo especial de exceção interna, cuja sub-rotina de tratamento (para onde o programa irá saltar após a contagem de 5 eventos) será responsável por acender o LED, recarregar os registradores acumuladores do TMR1 e zerar a flag TMR1IF. Ajustar o clock do microcontrolador PIC18F4550 para 8 MHz no SimulIDE, carregar o firmware (arquivo hex resultante da compilação no software MikroC PRO for PIC) e realizar a simulação. Apresentar na resposta o programa em linguagem C comentado e print do circuito montado e simulação realizada no SimulIDE.*
 
