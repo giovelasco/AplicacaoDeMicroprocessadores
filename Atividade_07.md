@@ -196,9 +196,54 @@ void main() {
 
 • *Implemente no SimulIDE, com base no Exemplo 7 disponibilizado no e-Disciplinas, um programa para acender um LED (conectado à um dos pinos do PORTD) após 5 eventos (representados por um botão na configuração pull-up pressionado por 5 vezes) utilizando o Timer1(TMR1) no modo contador (modo 16 bits). Para tanto, o botão deve ser conectado ao pino T13CKI do PIC18F4550 (ver qual é por meio da pinagem disponível no datasheet e no material de aula). Configurar o uso de interrupção (interrupção interna) do TMR1 (habilitar a chave de interrupções de periféricos e ativar flag IE e zerar IF referente ao TMR1). Neste contexto, a interrupção do TMR1 é um tipo especial de exceção interna, cuja sub-rotina de tratamento (para onde o programa irá saltar após a contagem de 5 eventos) será responsável por acender o LED, recarregar os registradores acumuladores do TMR1 e zerar a flag TMR1IF. Ajustar o clock do microcontrolador PIC18F4550 para 8 MHz no SimulIDE, carregar o firmware (arquivo hex resultante da compilação no software MikroC PRO for PIC) e realizar a simulação. Apresentar na resposta o programa em linguagem C comentado e print do circuito montado e simulação realizada no SimulIDE.*
 
+https://github.com/user-attachments/assets/a6f9b447-76ab-4771-8152-843c4951e906
 
-<br>
+#### Código em linguagem C:
+``` C
+void Interrupt_HIGH() iv 0x0008 ics ICS_AUTO { 
+   if(PIR1.TMR1IF == 1){
+       PORTD.RD2 = ~LATD.RD2; // inverte o LED
+       
+       // recarregar valores iniciais no Timer1
+       TMR1H=0xFF;
+       TMR1L=0xFB;
+       
+       PIR1.TMR1IF = 0; // zera a flag de overflow
+    }
+}
 
+void ConfigMCU(){
+ ADCON1 |= 0X0F; // pinos do microcontrolador como digitais
 
+ TRISC.RC0=1; // RC0 como entrada pois corresponde ao pino T1CK1, que incrementa a contagem do TMR1
+ PORTC.RC0=1;  // entrada C0 em pull-up
+ 
+ TRISD = 0;   // configuração dos LEDS
+ PORTD = 0; // LEDs inicialmente apagados
+}
 
+void ConfigInterrupt(){
+  INTCON.GIE = 1;   // chave geral, habilita o uso de interrupção
+  INTCON.PEIE = 1;   // habilita o uso de interrupções periféricas
+  RCON.IPEN = 0; // apenas um nível de prioridade de interrupção
+
+  T1CON = 0B10000011; // ativa modo 16 bits, clock em relação ao pino C0, ativa Timer1
+  
+  // valores iniciais para contar 5 eventos (65531 = FFFB em hexadecimal)
+  TMR1H=0xFF;
+  TMR1L=0xFB;
+
+  PIR1.TMR1IF = 0;    // flag de estouro do TIMER1, iniciada em 0
+  PIE1.TMR1IE = 1;    // habilita a interrupção do TIMER1
+  IPR1.TMR1IP = 1;    // prioridade de interrupção do TIMER1 em alta prioridade
+}
+
+void main() {
+   ConfigMCU();
+   ConfigInterrupt();
+
+  while(1); // pooling
+
+}
+```
 
