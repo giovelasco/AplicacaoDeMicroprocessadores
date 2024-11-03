@@ -12,9 +12,11 @@ https://github.com/user-attachments/assets/567a665f-f811-4978-be37-09ac763ed445
 
 #### Código em C
 
+<br>
+
+
 #### Exemplo 11
 
-https://github.com/user-attachments/assets/fc402796-7586-4063-94fa-5ac87cd27ada
-
+https://github.com/user-attachments/assets/54c27696-d7a3-4f19-90ee-13032404dfe3
 
 #### Código em C
