@@ -13,24 +13,22 @@ https://github.com/user-attachments/assets/567a665f-f811-4978-be37-09ac763ed445
 #### Código em C do Exemplo 10
 
 ``` C
-
 void ConfigMCU(){
-  TRISA.RA0 = 1;  // pino AN0 como entrada (canal analógico escolhido neste ex.)
-  PORTA.RA0 = 1;  // opcional   (pull-up)
+  TRISA.RA0 = 1;  // pino AN0 como entrada 
+  PORTA.RA0 = 1;  // pull-up
   
   ADCON0 = 0B00001101;  // AN0 -> AD ligado, leitura deslig., canal AN0
   ADCON1 = 0B00000000; // tensões de ref. internas = VDD e Vss
-  ADCON2 = 0B10101010; // Justificativa para direita, FOSC/32 (tempo entre 2 e 25 us) e 12 TAD (tempo de conversão de cada bit + 2 TAD)
+  ADCON2 = 0B10101010; // justificativa para direita, FOSC/32 (tempo entre 2 e 25 us) e 12 TAD (tempo de conversão de cada bit + 2 TAD)
 }
 
 void ConfigLCD(){
-  Lcd_Init();                        //Inicializa display no modo 4 bits
-  Lcd_Cmd(_LCD_CLEAR);               //Apaga display
-  Lcd_Cmd(_LCD_CURSOR_OFF);          //Desliga cursor
+  Lcd_Init();                        // inicializa display no modo 4 bits
+  Lcd_Cmd(_LCD_CLEAR);               // apaga display
+  Lcd_Cmd(_LCD_CURSOR_OFF);          // desliga cursor
   Lcd_Out(1,1,"ADC: ");              // escrita: Linha x Coluna
 
-  // Config. de pinos do LCD  (PORTB) conforme exemplo da biblioteca do compilador
-  
+  // config. de pinos do LCD  (PORTB) conforme exemplo da biblioteca do compilador
   // pinos utilizados para comunicação com o display LCD
   sbit LCD_RS at LATB4_bit;  // pino 4 do PORTB interligado ao RS do display
   sbit LCD_EN at LATB5_bit;  // pino 5 do PORTB " " ao EN do display
@@ -51,18 +49,15 @@ void ConfigLCD(){
 
 void main() {
   unsigned int Leitura_ADC;  // variav. de leitura ADC
-  unsigned char Texto[10];  //Display LCD - tipo char - int 8 bits (lembrando: Arranjo= tipo nome [n° de elementos])
+  unsigned char Texto[10];  // display LCD - tipo char - int 8 bits 
 
   ConfigMCU();
   ConfigLCD();
   
    while(1) {
-     ADCON0.GO_DONE = 1;           //liga a leitura e inicia a conversão do ADC
-       while(ADCON0.GO_DONE == 1);   //Aguardar o término da conversão - após a
-       //conversão terminar esse bit será  = 0 e essa condição não é mais
-       // verdadeira. Sendo assim, o programa vai para a próxima linha
+     ADCON0.GO_DONE = 1;           // liga a leitura e inicia a conversão do ADC
+       while(ADCON0.GO_DONE == 1);   // pooling enquanto houver conversão
   
-       //Leitura_ADC = ADRESH + ADRESL; //0 a 1023; em que: '|' = OR bit a bit
       Leitura_ADC = ((ADRESH << 8)| ADRESL);
   
       // mostrar os valores no display LCD 
