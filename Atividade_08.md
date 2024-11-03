@@ -145,9 +145,6 @@ void main(){
     // a partir daqui, não serão mais exibidos valores, os quais poderão ser
     //adicionados caso se deseja exibir, por ex., mais casas decimais
 
-    //floatToStr(Valor_ADC , Tensao);
-    //Tensao[5] = 0;
-
 
      // Exibir os valores na config. acima no display LCD:
     Lcd_Out(1,6,Tensao); // Mostra os valores no display
