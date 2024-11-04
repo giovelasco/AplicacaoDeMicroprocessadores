@@ -19,7 +19,7 @@ void config() {
 
 
  TMR0H = 0x0B;
- TMR0L = 0xCC;
+ TMR0L = 0xDC;
  INTCON.TMR0IF = 0;
  T0CON.TMR0ON = 1;
 
@@ -37,7 +37,7 @@ void interrupt() {
  if (INTCON.INT0IF) {
  INTCON.INT0IF = 0;
  TMR0H = 0x0B;
- TMR0L = 0xCC;
+ TMR0L = 0xDC;
  interrupcoes_por_incremento = 4;
  contagem_ativa = 1;
  }
@@ -46,7 +46,7 @@ void interrupt() {
  if (INTCON3.INT1IF) {
  INTCON3.INT1IF = 0;
  TMR0H = 0x0B;
- TMR0L = 0xCC;
+ TMR0L = 0xDC;
  interrupcoes_por_incremento = 1;
  contagem_ativa = 1;
  }
@@ -55,7 +55,7 @@ void interrupt() {
  if (INTCON.TMR0IF && contagem_ativa) {
  INTCON.TMR0IF = 0;
  TMR0H = 0x0B;
- TMR0L = 0xCC;
+ TMR0L = 0xDC;
 
 
  contador_interrupcoes++;

@@ -13,11 +13,11 @@ _config:
 ;Projeto2.c,17 :: 		T0CON = 0B00000010;  //TIMER_OFF, MOD_16BITS, TIMER, PRES_1:8
 	MOVLW       2
 	MOVWF       T0CON+0 
-;Projeto2.c,20 :: 		TMR0H = 0x0B;          // Parte alta do valor inicial (0xC2F7)
+;Projeto2.c,20 :: 		TMR0H = 0x0B;          // Parte alta do valor inicial
 	MOVLW       11
 	MOVWF       TMR0H+0 
-;Projeto2.c,21 :: 		TMR0L = 0xCC;          // Parte baixa do valor inicial
-	MOVLW       204
+;Projeto2.c,21 :: 		TMR0L = 0xDC;          // Parte baixa do valor inicial
+	MOVLW       220
 	MOVWF       TMR0L+0 
 ;Projeto2.c,22 :: 		INTCON.TMR0IF = 0;  // Zera a Flag  (vai p/ 1 quando ocorrer o overflow)
 	BCF         INTCON+0, 2 
@@ -46,8 +46,8 @@ _interrupt:
 ;Projeto2.c,38 :: 		TMR0H = 0x0B;                    // Carrega o valor de recarga para 250 ms
 	MOVLW       11
 	MOVWF       TMR0H+0 
-;Projeto2.c,39 :: 		TMR0L = 0xCC;
-	MOVLW       204
+;Projeto2.c,39 :: 		TMR0L = 0xDC;
+	MOVLW       220
 	MOVWF       TMR0L+0 
 ;Projeto2.c,40 :: 		interrupcoes_por_incremento = 4; // 4 interrupções de 250 ms para 1 segundo
 	MOVLW       4
@@ -69,8 +69,8 @@ L_interrupt0:
 ;Projeto2.c,47 :: 		TMR0H = 0x0B;                    // Carrega o valor de recarga para 250 ms
 	MOVLW       11
 	MOVWF       TMR0H+0 
-;Projeto2.c,48 :: 		TMR0L = 0xCC;
-	MOVLW       204
+;Projeto2.c,48 :: 		TMR0L = 0xDC;
+	MOVLW       220
 	MOVWF       TMR0L+0 
 ;Projeto2.c,49 :: 		interrupcoes_por_incremento = 1; // Apenas 1 interrupção para 250 ms
 	MOVLW       1
@@ -97,8 +97,8 @@ L__interrupt11:
 ;Projeto2.c,56 :: 		TMR0H = 0x0B;                    // Recarrega o Timer0 com o valor inicial para 250 ms
 	MOVLW       11
 	MOVWF       TMR0H+0 
-;Projeto2.c,57 :: 		TMR0L = 0xCC;
-	MOVLW       204
+;Projeto2.c,57 :: 		TMR0L = 0xDC;
+	MOVLW       220
 	MOVWF       TMR0L+0 
 ;Projeto2.c,60 :: 		contador_interrupcoes++;
 	INFSNZ      _contador_interrupcoes+0, 1 

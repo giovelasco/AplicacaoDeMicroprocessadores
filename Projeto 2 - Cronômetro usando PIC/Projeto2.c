@@ -17,8 +17,8 @@ void config() {
     T0CON = 0B00000010;  //TIMER_OFF, MOD_16BITS, TIMER, PRES_1:8
 
     // Carrega o valor inicial do Timer0 para gerar um atraso de 250 ms
-    TMR0H = 0x0B;          // Parte alta do valor inicial (0xC2F7)
-    TMR0L = 0xCC;          // Parte baixa do valor inicial
+    TMR0H = 0x0B;          // Parte alta do valor inicial
+    TMR0L = 0xDC;          // Parte baixa do valor inicial
     INTCON.TMR0IF = 0;  // Zera a Flag  (vai p/ 1 quando ocorrer o overflow)
     T0CON.TMR0ON = 1;   // Liga o TIMER0
 
@@ -36,7 +36,7 @@ void interrupt() {
     if (INTCON.INT0IF) {
         INTCON.INT0IF = 0;               // Limpa a flag de interrupção
         TMR0H = 0x0B;                    // Carrega o valor de recarga para 250 ms
-        TMR0L = 0xCC;
+        TMR0L = 0xDC;
         interrupcoes_por_incremento = 4; // 4 interrupções de 250 ms para 1 segundo
         contagem_ativa = 1;              // Ativa a contagem
     }
@@ -45,7 +45,7 @@ void interrupt() {
     if (INTCON3.INT1IF) {
         INTCON3.INT1IF = 0;              // Limpa a flag de interrupção
         TMR0H = 0x0B;                    // Carrega o valor de recarga para 250 ms
-        TMR0L = 0xCC;
+        TMR0L = 0xDC;
         interrupcoes_por_incremento = 1; // Apenas 1 interrupção para 250 ms
         contagem_ativa = 1;              // Ativa a contagem
     }
@@ -54,7 +54,7 @@ void interrupt() {
     if (INTCON.TMR0IF && contagem_ativa) {
         INTCON.TMR0IF = 0;               // Limpa a flag de interrupção do Timer0
         TMR0H = 0x0B;                    // Recarrega o Timer0 com o valor inicial para 250 ms
-        TMR0L = 0xCC;
+        TMR0L = 0xDC;
 
         // Incrementa o contador de interrupções
         contador_interrupcoes++;
