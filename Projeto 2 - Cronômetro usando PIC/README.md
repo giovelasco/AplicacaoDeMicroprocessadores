@@ -14,7 +14,7 @@ botão pressionado. O funcionamento consiste em:
 
 • O display se inicia desligado e a contagem começa somente quando qualquer um dos botões é pressionado.
 
-A simulação foi realizada no software SimulIde, com o microprocessador PIC18F4550 com uma frequência de clock de 8 MHz. Os conceitos envolvidos no desenvolvimento
+A simulação foi realizada no software SimulIDE, com o microprocessador PIC18F4550 com uma frequência de clock de 8 MHz. Os conceitos envolvidos no desenvolvimento
 do código e da simulação estão mais detalhados a seguir:
 
 ### Conceitos Envolvidos
@@ -29,18 +29,22 @@ As configurações iniciais do Timer0 para sua utilização pretendida foram def
     T0CON = 0B00000010;  // TIMER_OFF, MOD_16BITS, TIMER, PRES_1:8
 
     // Carrega o valor inicial do Timer0 para gerar um atraso de 250 ms
-    TMR0H = 0x0B;          // Parte alta do valor inicial (0xC2F7)
-    TMR0L = 0xCC;          // Parte baixa do valor inicial
+    TMR0H = 0x0B;          // Parte alta do valor inicial (0x0BDC)
+    TMR0L = 0xDC;          // Parte baixa do valor inicial
     INTCON.TMR0IF = 0;  // Zera a Flag  (vai p/ 1 quando ocorrer o overflow)
     T0CON.TMR0ON = 1;   // Liga o TIMER0
 ```
 
-O Timer0 foi utilziado em modo de 16 bits, modo timer e com prescale de 1:8. Esse prescale foi definido desta forma por conta de uma falha presente no SImulIDE, que
+O Timer0 foi utilziado em modo de 16 bits, modo timer e com prescale de 1:8. Esse prescale foi definido desta forma por conta de uma falha presente no SimulIDE, que
  favorece a utilização da menor razão possível do prescale a fim de obter uma contagem de tempo mais correta. O valor carregado inicialmente nos registradores
  do Timer0 foram escolhidos com base na seguinte equação:
 
+tempo = ciclo de máquina * prescalar * (modo_16bits - valor inicial)
 
- Que, ao substituir os valores e realizar as contas, resulta em 49911, que em hexadecimal é 0xC2F7. Assim, carregamos esse valor para gerar um atraso de 0,25s.
+0,25 = 0.5 us * 8 * (65536 - x)
+
+Resolvendo a equação para x, encontramos que x = 3036, que em hexadecimal é 0BDC C2F7. Portanto, carregamos TMR0H com 0x0B e TMR0L com 0xDC para gerar um atraso de 0,25s.
+
 
 #### Interrupções
 
