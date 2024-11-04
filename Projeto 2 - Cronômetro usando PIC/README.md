@@ -75,6 +75,8 @@ na conexão para evidenciar a necessidade de controlar a corrente que chega no d
 ### Vídeo demonstrativo
 
 
+https://github.com/user-attachments/assets/75d414e8-5b0b-49ac-83ea-7304d3bb3cef
+
 
 ### Comparação entre Projeto 1 e Projeto 2
 
