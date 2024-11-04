@@ -96,4 +96,9 @@ Além disso, o segundo projeto foi desenvolvido em linguagem C, que é uma lingu
 Ademais, a linguagem C foi utilizada com maior frequência ao longo do curso de Engenharia de Computação e, portanto, nós possuímos uma maior familiaridade inicial 
 com a linguagem C. 
 
+### Conclusão
+
+O projeto foi concluído com êxito: pelo vídeo demonstrativo, percebemos que o delay de cada botão parece adequado e o dispositivo funciona como esperado.
+Além disso, a realização do projeto contribuiu para a plena compreensão do uso de timers e interrupções e a sua importância para as diversas aplicações em 
+sistemas embarcados.
 
