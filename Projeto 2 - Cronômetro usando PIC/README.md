@@ -1,6 +1,5 @@
-# Projeto 2 - Cronômetro Digital com Timer e Interrupções
+## Projeto 2 - Cronômetro Digital com Timer e Interrupções <br> <br> Jean Carlos Pereira Cassiano - NUSP: 13864008 <br> Giovanna de Freitas Velasco - NUSP: 13676346
 
-## Jean Carlos Pereira Cassiano - NUSP: 13864008 <br> Giovanna de Freitas Velasco - NUSP: 13676346
 
 ### Introdução
 
