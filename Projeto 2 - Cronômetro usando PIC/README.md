@@ -25,7 +25,7 @@ Nesse projeto, fizemos uso do Timer0 com Interrupção externa nos botões para 
 As configurações iniciais do Timer0 para sua utilização pretendida foram definidas no código da seguinte forma:
 
 ``` C
- // Configuração do Timer0 em modo de 16 bits
+    // Configuração do Timer0 em modo de 16 bits
     T0CON = 0B00000010;  // TIMER_OFF, MOD_16BITS, TIMER, PRES_1:8
 
     // Carrega o valor inicial do Timer0 para gerar um atraso de 250 ms
@@ -35,7 +35,7 @@ As configurações iniciais do Timer0 para sua utilização pretendida foram def
     T0CON.TMR0ON = 1;   // Liga o TIMER0
 ```
 
-O Timer0 foi utilziado em modo de 16 bits, modo timer e com prescale de 1:8. Esse prescale foi definido desta forma por conta de uma falha presente no SimulIDE, que
+O Timer0 foi utilizado em modo de 16 bits, modo timer e com prescale de 1:8. Esse prescale foi definido desta forma por conta de uma falha presente no SimulIDE, que
  favorece a utilização da menor razão possível do prescale a fim de obter uma contagem de tempo mais correta. O valor carregado inicialmente nos registradores
  do Timer0 foram escolhidos com base na seguinte equação:
 
@@ -45,16 +45,35 @@ tempo = ciclo de máquina * prescalar * (modo_16bits - valor inicial)
 
 Resolvendo a equação para x, encontramos que x = 3036, que em hexadecimal é 0BDC C2F7. Portanto, carregamos TMR0H com 0x0B e TMR0L com 0xDC para gerar um atraso de 0,25s.
 
-
 #### Interrupções
 
+As interrupções são desvios realizados pelo hardware do microcontrolador quando determinado evento ocorre. Em nosso caso, a interrupção é causada por 
+pressionar um botão, que inicia o processo de contagem no cronômetro. A habilitação dessas interrupções é realizada no código por essa configuração 
+do registrador INTCON:
 
+``` C
     // Configuração de interrupções
     INTCON = 0xE0;   // Habilita interrupções globais, TMR0 e externas
+```
+
+E a subrotina para a qual o hardware vai quando ocorrem as interrupções estão presentes na função *void interrupt()*.
 
 #### Acionamento do display de 7 segmentos
 
-![image](https://github.com/user-attachments/assets/2231bdae-8a3c-4e54-baf9-52cdbed33283)
+O display de 7 segmentos utilizado para mostrar os números do cronômetro foi configurado de acordo com a pinagem presente nessa tabela:
+
+![image](https://github.com/user-attachments/assets/a8716983-5054-4eb0-a489-7cfe67ce8e60)
+
+``` C
+    // Configuração do display de 7 segmentos (cátodo comum, com underscore e ponto decimal)
+    char segmentos[10] = {0b00111111, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F};
+``` 
+
+Por mais que o display presente no SimulIDE já tenha algumas resistências internas que podem ser configuradas, optamos por adicionar um array de resistores
+na conexão para evidenciar a necessidade de controlar a corrente que chega no display.
+
+
+#### Vídeo demonstrativo
 
 
 
