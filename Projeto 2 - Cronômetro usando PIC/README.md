@@ -69,7 +69,7 @@ acordo com a pinagem presente nessa tabela:
 ``` 
 
 Por mais que o display presente no SimulIDE já tenha algumas resistências internas que podem ser configuradas, optamos por adicionar um array de resistores
-na conexão para evidenciar a necessidade de controlar a corrente que chega no display.
+na conexão para evidenciar a necessidade de controlar a corrente que chega no display para regular o brilho do display.
 
 
 ### Vídeo demonstrativo
