@@ -1,6 +1,5 @@
 ## Projeto 2 - Cronômetro Digital com Timer e Interrupções <br> <br> Jean Carlos Pereira Cassiano - NUSP: 13864008 <br> Giovanna de Freitas Velasco - NUSP: 13676346
 
-
 ### Introdução
 
 O presente projeto contém o código em Linguagem C de um Cronômetro Digital para o microcontrolador PIC18F4550. O funcionamento de tal cronômetro é idêntico
@@ -73,8 +72,26 @@ Por mais que o display presente no SimulIDE já tenha algumas resistências inte
 na conexão para evidenciar a necessidade de controlar a corrente que chega no display.
 
 
-#### Vídeo demonstrativo
+### Vídeo demonstrativo
 
 
+
+### Comparação entre Projeto 1 e Projeto 2
+
+O Projeto 1 consistiu na elaboração do mesmo cronômetro, mas em linguagem Assembly e sem a utilização de interrupções. O programa, então, ficava sempre
+verificando se houve alguma alteração no estado dos Switches 0 e 1 para iniciar a contagem. Essa espera ocupada não era eficiente, uma vez que o programa
+ficava parado naquele estado até que houvesse uma mudança. 
+
+Isso não ocorre no Projeto 2 com a utilização de interrupções, que permite que o programa siga rodando normalmente até que seja detectada uma alteração no 
+estado portas designadas, nesse caso RB0 e RB1, momento em que o programa sofre um desvio para tratar a interrupção de acordo com o botão pressionado.
+
+A precisão do tempo do cronômetro também foi maior no Projeto 2 que no Projeto 1. Isso está relacionado às IDEs utilizadas, seus propósitos e recursos oferecidos:
+enquanto o SimulIDE tenta mostrar a aplicação do microcontrolador em tempo real com a utilização do Timer0, o que aumenta sua confiabilidade. Já o EdSIm8051 
+mostra cada instrução que ocorre no 8051, o que diminui a precisão da contabilização do tempo por não utilizarmos um Timer, e sim medirmos uma aproximação 
+do tempo de delay fazendo o programa ficar parado em determinadas linhas.
+
+Além disso, o segundo projeto foi desenvolvido em linguagem C, que é uma linguagem com abstração maior do que Assembly, o que torna sua manipulação mais fácil.
+Ademais, a linguagem C foi utilizada com maior frequência ao longo do curso de Engenharia de Computação e, portanto, nós possuímos uma maior familiaridade inicial 
+com a linguagem C. 
 
 
