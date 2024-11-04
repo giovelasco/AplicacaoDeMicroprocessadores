@@ -29,7 +29,7 @@ As configurações iniciais do Timer0 para sua utilização pretendida foram def
     T0CON = 0B00000010;  // TIMER_OFF, MOD_16BITS, TIMER, PRES_1:8
 
     // Carrega o valor inicial do Timer0 para gerar um atraso de 250 ms
-    TMR0H = 0x0B;          // Parte alta do valor inicial (0x0BDC)
+    TMR0H = 0x0B;          // Parte alta do valor inicial 
     TMR0L = 0xDC;          // Parte baixa do valor inicial
     INTCON.TMR0IF = 0;  // Zera a Flag  (vai p/ 1 quando ocorrer o overflow)
     T0CON.TMR0ON = 1;   // Liga o TIMER0
