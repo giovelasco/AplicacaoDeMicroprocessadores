@@ -71,6 +71,29 @@ acordo com a pinagem presente nessa tabela:
 Por mais que o display presente no SimulIDE já tenha algumas resistências internas que podem ser configuradas, optamos por adicionar um array de resistores
 na conexão para evidenciar a necessidade de controlar a corrente que chega no display para regular o brilho do display.
 
+### Análise das funções do código
+
+#### void config()
+Essa função realiza as configurações iniciais do microprocessador, defininido:
+
+• Portas de entradas (RB0 e RB1) e saída (Porta D e RC0).
+
+• As configurações do Timer0, elaboradas previamente.
+
+• Ativação das interrupções do Timer0
+
+• Configuração do display
+
+#### void interrupt()
+
+Essa função é chamada quando ocorre uma interrupção pelo Timer0, ou seja, quando o botão RB0 ou RB1 é pressionado. Nesse caso, ocorre uma verificação
+de qual dos dois botões foi pressionado pela verificação do bits INTCON.INT0IF e INTCON3.INT1IF. Após verificar qual botão foi pressionado, limpamos a flag de
+interrupção que havia sido ativada e recarregamos os valores de TMR0L e TMR0H para gerar o delay de 250ms. O delay de 1 segundo consiste em 4 repetições do delay
+de 0.25s, o que é detectado pela função.
+
+
+#### main()
+A main consiste na ativação das configurações do microcontrolador e, em seguida, o programa permanece em pooling até que alguma interrupção ocorra.
 
 ### Vídeo demonstrativo
 
