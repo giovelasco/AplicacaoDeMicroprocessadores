@@ -1,4 +1,8 @@
-## Projeto 2 - Cronômetro Digital com Timer e Interrupções
+# Projeto 2 - Cronômetro Digital com Timer e Interrupções
+
+## Jean Carlos Pereira Cassiano - NUSP: 13864008 <br> Giovanna de Freitas Velasco - NUSP: 13676346
+
+### Introdução
 
 O presente projeto contém o código em Linguagem C de um Cronômetro Digital para o microcontrolador PIC18F4550. O funcionamento de tal cronômetro é idêntico
 ao presente no projeto anterior (Projeto 1), porém, nesse projeto serão utilizados temporizadores e interrupções e mudança das bases de contagem a partir do 
@@ -17,7 +21,32 @@ do código e da simulação estão mais detalhados a seguir:
 
 #### Timers
 
+Nesse projeto, fizemos uso do Timer0 com Interrupção externa nos botões para gerar as bases de tempo da contagem e provocar as mudanças necessárias.
+As configurações iniciais do Timer0 para sua utilização pretendida foram definidas no código da seguinte forma:
+
+``` C
+ // Configuração do Timer0 em modo de 16 bits
+    T0CON = 0B00000010;  // TIMER_OFF, MOD_16BITS, TIMER, PRES_1:8
+
+    // Carrega o valor inicial do Timer0 para gerar um atraso de 250 ms
+    TMR0H = 0x0B;          // Parte alta do valor inicial (0xC2F7)
+    TMR0L = 0xCC;          // Parte baixa do valor inicial
+    INTCON.TMR0IF = 0;  // Zera a Flag  (vai p/ 1 quando ocorrer o overflow)
+    T0CON.TMR0ON = 1;   // Liga o TIMER0
+```
+
+O Timer0 foi utilziado em modo de 16 bits, modo timer e com prescale de 1:8. Esse prescale foi definido desta forma por conta de uma falha presente no SImulIDE, que
+ favorece a utilização da menor razão possível do prescale a fim de obter uma contagem de tempo mais correta. O valor carregado inicialmente nos registradores
+ do Timer0 foram escolhidos com base na seguinte equação:
+
+
+ Que, ao substituir os valores e realizar as contas, resulta em 49911, que em hexadecimal é 0xC2F7. Assim, carregamos esse valor para gerar um atraso de 0,25s.
+
 #### Interrupções
+
+
+    // Configuração de interrupções
+    INTCON = 0xE0;   // Habilita interrupções globais, TMR0 e externas
 
 #### Acionamento do display de 7 segmentos
 
