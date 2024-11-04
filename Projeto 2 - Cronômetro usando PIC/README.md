@@ -60,7 +60,8 @@ E a subrotina para a qual o hardware vai quando ocorrem as interrupções estão
 
 #### Acionamento do display de 7 segmentos
 
-O display de 7 segmentos utilizado para mostrar os números do cronômetro foi configurado de acordo com a pinagem presente nessa tabela:
+O display está conectado na configuração cátodo comum, ou seja, os segmentos se acendem com nível lógico 1. Além disso, ele foi conectado ao PORTD de
+acordo com a pinagem presente nessa tabela:
 
 ![image](https://github.com/user-attachments/assets/a8716983-5054-4eb0-a489-7cfe67ce8e60)
 
