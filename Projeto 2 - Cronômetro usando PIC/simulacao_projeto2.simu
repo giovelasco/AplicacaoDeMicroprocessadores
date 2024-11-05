@@ -1,5 +1,9 @@
 <circuit Simu_Step_nS="1000" Speed_per="100" reactStep="50" animate="0" noLinAcc="5" type="simulide_0.4" Speed_sps="1000000">
 
+Unique  Id: Node-159: 
+Circuit Id: Node-159
+<item labelrot="0" labely="-24" vflip="1" circPos="0,0" labelx="-16" valLabelx="0" mainComp="false" valLabRot="0" itemtype="Node" boardRot="-1e+06" objectName="Node-159" x="-452" y="60" Show_id="false" hflip="1" circRot="0" id="Node-159" boardPos="-1e+06,-1e+06" rotation="0" valLabely="0"/>
+
 Unique  Id: TextComponent-142: 
 Circuit Id: TextComponent-142
 <item labelrot="0" labely="-24" vflip="1" circPos="0,0" Margin="5" labelx="-16" valLabelx="0" mainComp="false" valLabRot="0" Text="Delay 0,25s" Fixed_Width="true" itemtype="TextComponent" Font="Helvetica [Cronyx]" boardRot="-1e+06" objectName="TextComponent-142" Opacity="1" x="-188" y="-168" Show_id="false" hflip="1" circRot="1.1126014391586592e-306" id="TextComponent-142" boardPos="-1e+06,-1e+06" Border="1" rotation="0" Font_Size="10" valLabely="0"/>
@@ -22,7 +26,7 @@ Circuit Id: Seven Segment-40
 
 Unique  Id: pic18f4550-1: 
 Circuit Id: pic18f4550-1
-<item labelrot="0" labely="-20" vflip="1" circPos="0,0" Logic_Symbol="false" varList=",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,," labelx="0" valLabelx="0" mainComp="false" valLabRot="0" eeprom="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" Name="" itemtype="PIC" boardRot="-1e+06" Auto_Load="false" objectName="pic18f4550-1" x="-356" y="-180" Mhz="8" Show_id="true" hflip="1" circRot="0" id="pic18f4550-1" Program="../Desktop/Projeto2.hex" boardPos="-1e+06,-1e+06" rotation="0" valLabely="0"/>
+<item labelrot="0" labely="-20" vflip="1" circPos="0,0" Logic_Symbol="false" varList=",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,," labelx="0" valLabelx="0" mainComp="false" valLabRot="0" eeprom="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" Name="" itemtype="PIC" boardRot="-1e+06" Auto_Load="false" objectName="pic18f4550-1" x="-356" y="-180" Mhz="8" Show_id="true" hflip="1" circRot="0" id="pic18f4550-1" Program="Projeto 2 - Cronômetro usando PIC/Projeto2.hex" boardPos="-1e+06,-1e+06" rotation="0" valLabely="0"/>
 
 Unique  Id: Push-52: 
 Circuit Id: Push-52
@@ -134,6 +138,14 @@ Circuit Id: Connector-138
 
 Unique  Id: Connector-139: 
 Circuit Id: Connector-139
-<item labelrot="0" pointList="-404,60,-452,60,-452,116,-260,116,-260,-92,-300,-92" labely="-24" vflip="1" circPos="0,0" enodeid="enode-139" labelx="-16" valLabelx="0" mainComp="false" startpinid="ResistorDip-87-resistor7-ePin14" valLabRot="0" itemtype="Connector" endpinid="pic18f4550-1-RD7" boardRot="-1e+06" objectName="Connector-139" x="-404" y="60" Show_id="false" hflip="1" circRot="7.065881965563723e-304" id="Connector-139" boardPos="-1e+06,-1e+06" rotation="0" valLabely="0"/>
+<item labelrot="0" pointList="-404,60,-452,60" labely="-24" vflip="1" circPos="0,0" enodeid="enode-158" labelx="-16" valLabelx="0" mainComp="false" startpinid="ResistorDip-87-resistor7-ePin14" valLabRot="0" itemtype="Connector" endpinid="Node-159-0" boardRot="-1e+06" objectName="Connector-139" x="-404" y="60" Show_id="false" hflip="1" circRot="1.7095794e-316" id="Connector-139" boardPos="-1e+06,-1e+06" rotation="0" valLabely="0"/>
+
+Unique  Id: Connector-158: 
+Circuit Id: Connector-158
+<item labelrot="0" pointList="-364,-60,-452,-60,-452,60" labely="-24" vflip="1" circPos="0,0" enodeid="enode-158" labelx="-16" valLabelx="0" mainComp="false" startpinid="pic18f4550-1-RC0" valLabRot="0" itemtype="Connector" endpinid="Node-159-1" boardRot="-1e+06" objectName="Connector-158" x="-364" y="-60" Show_id="false" hflip="1" circRot="7.787962219220545e-308" id="Connector-158" boardPos="-1e+06,-1e+06" rotation="0" valLabely="0"/>
+
+Unique  Id: Connector-160: 
+Circuit Id: Connector-160
+<item labelrot="0" pointList="-452,60,-452,116,-260,116,-260,-92,-300,-92" labely="-24" vflip="1" circPos="0,0" enodeid="enode-158" labelx="-16" valLabelx="0" mainComp="false" startpinid="Node-159-2" valLabRot="0" itemtype="Connector" endpinid="pic18f4550-1-RD7" boardRot="-1e+06" objectName="Connector-160" x="-452" y="60" Show_id="false" hflip="1" circRot="7.787962219220545e-308" id="Connector-160" boardPos="-1e+06,-1e+06" rotation="0" valLabely="0"/>
  
 </circuit>
