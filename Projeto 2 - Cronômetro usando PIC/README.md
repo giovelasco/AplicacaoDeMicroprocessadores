@@ -3,7 +3,7 @@
 ### Introdução
 
 O presente projeto contém o código em Linguagem C de um Cronômetro Digital para o microcontrolador PIC18F4550. O funcionamento de tal cronômetro é idêntico
-ao presente no projeto anterior (Projeto 1), porém, nesse projeto serão utilizados temporizadores e interrupções e mudança das bases de contagem a partir do 
+ao presente no projeto anterior (Projeto 1), porém, nesse projeto serão utilizados temporizadores, interrupções e mudança das bases de contagem a partir do 
 botão pressionado. O funcionamento consiste em:
 
 • Quando um botão conectado na porta RB0 for pressionado, um display de 7 segmentos ligado na Porta D deve contar (de 0 a 9 em loop) com período de 1s.
@@ -76,7 +76,7 @@ na conexão para evidenciar a necessidade de controlar a corrente que chega no d
 #### void config()
 Essa função realiza as configurações iniciais do microprocessador, defininido:
 
-• Portas de entradas (RB0 e RB1) e saída (Porta D e RC0).
+• Portas de entradas (RB0 e RB1) e saída (Porta D).
 
 • As configurações do Timer0, elaboradas previamente.
 
