@@ -11,7 +11,6 @@ void config() {
     // Configurações iniciais das portas
     TRISB = 0b00000011;    // RB0 e RB1 como entrada (botões)
     TRISD = 0x00;          // Porta D como saída (display de 7 segmentos)
-    TRISC = 0xFE;          // RC0 como saída para controlar o underscore
 
     // Configuração do Timer0 em modo de 16 bits
     T0CON = 0B00000010;  //TIMER_OFF, MOD_16BITS, TIMER, PRES_1:8
@@ -71,13 +70,6 @@ void interrupt() {
 
             // Atualiza o display de 7 segmentos
             PORTD = segmentos[contador];
-
-            // Controle do underscore (ligado quando o contador é 0)
-            if (contador == 0) {
-                PORTC.RC0 = 1; // Liga o underscore
-            } else {
-                PORTC.RC0 = 0; // Desliga o underscore
-            }
         }
     }
 }
