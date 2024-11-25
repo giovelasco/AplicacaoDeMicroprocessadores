@@ -10,7 +10,8 @@ Enquanto o PIC têm uma arquitetura Harvard de 8 bits, tanto o STM quanto ESP32 
 
 Em relação à memória, o PIC possui 32 KB de flash e 2 KB de RAM, o que a torna mais restrita para armazenamento. Já o STM32F103C8T6 apresenta flash de 64 KB e RAM de 20 KB, o que é superior ao PIC, mas ainda possui limitações para alto volume de dados. Por fim, a ESP32 WROOM apresenta uma flash de 4 MB e uma RAM de 520 KB, o que permite o desenvolvimento de aplicações mais robustas.
 
-Em relação ao clock, o PIC e o STM possuem clocks mais reduzidos (48 MHz e 72MHz) em relação à ESP32, que tem 240 MHz, sendo mais adequada para um amior desempenho e permite um processamento paralelo. Além disso, a ESP32 possui Suporte a redes sem fio como Wi-Fi, Bluetooth, o que é interessante para aplicações IOT.
+Em relação ao clock, o PIC e o STM possuem clocks mais reduzidos (48 MHz e 72MHz) em relação à ESP32, que tem 240 MHz, sendo mais adequada para um maior desempenho e permite um processamento paralelo. Além disso, a ESP32 possui Suporte a redes sem fio como Wi-Fi, Bluetooth, o que é interessante para aplicações IOT.
+
 
 <br>
 
