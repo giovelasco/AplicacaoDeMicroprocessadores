@@ -6,103 +6,11 @@
 
 ● *Analisando criticamente diferentes arquiteturas de microcontroladores (por meio dos datasheets), faça um breve e sucinto comparativo entre os principais recursos (focar nos mais importantes e essenciais que você consegue observar, com base no contato prévio e recursos utilizados nos projetos anteriores) dos microcontroladores PIC18F4550, STM32F103C8T6 (ou STM32F303VC – escolher um ou outro), e ESP32 WROOM Xtensa Dual Core (versão disponível na placa Devkit).*
 
-1. Arquitetura e Núcleos de Processamento
-PIC18F4550:
+Enquanto o PIC têm uma arquitetura Harvard de 8 bits, tanto o STM quanto ESP32 são microcontorladores de 32 bits. A arquitetura do STM32F103C8T6 é ARM Cortex-M3 com núcleo single-core, enquanto o ESP32 WROOM usa a arquitetura Xtensa LX6 com núcleo dual-core , sendo excelente para aplicações multitarefa, como IoT e conectividade. Como o PIC é um microcontrolador de 8 bits, ele é mais limitado que os outros, com um menor poder de processamento. 
 
-Arquitetura: Harvard, 8 bits.
-Núcleo: Single-core (PIC18).
-Limitado para tarefas que não demandam processamento intensivo.
+Em relação à memória, o PIC possui 32 KB de flash e 2 KB de RAM, o que a torna mais restrita para armazenamento. Já o STM32F103C8T6 apresenta flash de 64 KB e RAM de 20 KB, o que é superior ao PIC, mas ainda possui limitações para alto volume de dados. Por fim, a ESP32 WROOM apresenta uma flash de 4 MB e uma RAM de 520 KB, o que permite o desenvolvimento de aplicações mais robustas.
 
-
-STM32F103C8T6:
-Arquitetura: ARM Cortex-M3, 32 bits.
-Núcleo: Single-core.
-Muito mais eficiente para operações matemáticas e tarefas de tempo real em comparação ao PIC.
-
-
-ESP32 WROOM:
-Arquitetura: Xtensa LX6, 32 bits.
-Núcleo: Dual-core.
-Excelente para aplicações multitarefa, como IoT e conectividade.
-
-
-2. Clock e Desempenho
-PIC18F4550:
-
-Clock: até 48 MHz.
-Performance suficiente para tarefas simples, mas limitado em relação aos demais.
-STM32F103C8T6:
-
-Clock: até 72 MHz.
-Maior eficiência energética e capacidade para aplicações embarcadas mais complexas.
-ESP32 WROOM:
-
-Clock: até 240 MHz.
-Muito superior, ideal para aplicações que exigem alto desempenho e processamento paralelo.
-3. Memória (Flash/RAM)
-PIC18F4550:
-
-Flash: 32 KB.
-RAM: 2 KB.
-Restritivo para armazenamento de código e dados.
-STM32F103C8T6:
-
-Flash: 64 KB.
-RAM: 20 KB.
-Bem mais flexível, mas ainda limitado para sistemas com alto volume de dados.
-ESP32 WROOM:
-
-Flash: 4 MB (na Devkit).
-RAM: 520 KB SRAM + 8 KB RTC.
-Alta capacidade, permitindo desenvolvimento de aplicações mais robustas.
-4. Interfaces de Comunicação
-PIC18F4550:
-
-USB (Host/Device), I²C, SPI, USART.
-Funcional, mas menos diversificado comparado aos outros.
-STM32F103C8T6:
-
-I²C, SPI, USART, CAN, USB.
-Boa diversidade, incluindo suporte para CAN.
-ESP32 WROOM:
-
-Wi-Fi, Bluetooth, I²C, SPI, UART, CAN.
-Suporte a redes sem fio torna-o imbatível em aplicações IoT.
-5. Consumo de Energia
-PIC18F4550:
-
-Consumo moderado. Projetado para eficiência em tarefas simples.
-Bom para aplicações alimentadas por baterias pequenas.
-STM32F103C8T6:
-
-Consumo eficiente, com modos de baixo consumo bem otimizados.
-Ideal para sistemas embarcados.
-ESP32 WROOM:
-
-Consumo elevado devido à conectividade sem fio.
-Modo de baixa energia disponível, mas ainda menos eficiente que o STM32.
-6. Facilidade de Desenvolvimento e Comunidade
-PIC18F4550:
-
-Ferramentas: MPLAB X, XC8.
-Comunidade mais restrita e curva de aprendizado maior.
-STM32F103C8T6:
-
-Ferramentas: STM32CubeIDE, Keil, ou plataformas como Arduino.
-Comunidade grande, com ampla documentação e suporte.
-ESP32 WROOM:
-
-Ferramentas: ESP-IDF, Arduino, MicroPython.
-Excelente comunidade e recursos bem documentados.
-7. Aplicações Típicas
-PIC18F4550: Sistemas simples como controle de dispositivos e automação básica.
-STM32F103C8T6: Aplicações embarcadas mais complexas, incluindo sistemas de tempo real e controle.
-ESP32 WROOM: Aplicações IoT, processamento intensivo e conectividade Wi-Fi/Bluetooth.
-Conclusão
-PIC18F4550: Adequado para tarefas básicas e com baixo custo.
-STM32F103C8T6: Balanceado entre custo e desempenho; ideal para projetos de média complexidade.
-ESP32 WROOM: Melhor opção para IoT e projetos que exigem conectividade e alto desempenho.
-
+Em relação ao clock, o PIC e o STM possuem clocks mais reduzidos (48 MHz e 72MHz) em relação à ESP32, que tem 240 MHz, sendo mais adequada para um amior desempenho e permite um processamento paralelo. Além disso, a ESP32 possui Suporte a redes sem fio como Wi-Fi, Bluetooth, o que é interessante para aplicações IOT.
 
 <br>
 
