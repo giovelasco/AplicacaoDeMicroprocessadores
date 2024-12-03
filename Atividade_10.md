@@ -49,6 +49,8 @@ load:0x40080400,len:2972
 entry 0x400805dc
 ```
 
+<br>
+
 • “timer_interrupt” (montar o projeto no simulador Wokwi e testar o programa disponibilizado na pasta de exemplos).
 
 ```C
@@ -229,5 +231,6 @@ void loop() {
 
 ```
 
+Atividade extra: PicSimLab 4 velocidades
 
 • Descreva de forma sucinta como funcionam os tirmers, interrupções, ADC e DAC na ESP32. Quais são as diferenças em relação a esses recursos no PIC18F4450?
